@@ -25,6 +25,7 @@ export default class Main
 		this.app.stage.removeChildren()
 		this.app.stage.addChild(stage)
 	}
+	//:3
 	
 	
 }
