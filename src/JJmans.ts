@@ -5,9 +5,9 @@ import GameObject from "./GameObject";
 import Character from "./Character";
 import Player from "./Player";
 
-export default class Jotun extends Player
+export default class JJmans extends Player
 {
-	sprite: PIXI.extras.AnimatedSprite
+    sprite: PIXI.extras.AnimatedSprite
 
 	constructor()
 	{
@@ -24,4 +24,4 @@ export default class Jotun extends Player
 		this.sprite.gotoAndPlay(0)
 		this.sprite.animationSpeed = 0.2
 	}
-}
+}	

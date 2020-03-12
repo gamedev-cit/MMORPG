@@ -1,13 +1,11 @@
 import playerRunFrame1Url from './res/player_run_frame_1.png'
 import playerRunFrame2Url from './res/player_run_frame_2.png'
 
-import GameObject from "./GameObject";
-import Character from "./Character";
 import Player from "./Player";
 
-export default class Jotun extends Player
+export default class Bee extends Player
 {
-	sprite: PIXI.extras.AnimatedSprite
+    sprite: PIXI.extras.AnimatedSprite
 
 	constructor()
 	{
@@ -24,4 +22,5 @@ export default class Jotun extends Player
 		this.sprite.gotoAndPlay(0)
 		this.sprite.animationSpeed = 0.2
 	}
+    
 }

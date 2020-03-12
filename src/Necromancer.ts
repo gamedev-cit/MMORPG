@@ -1,11 +1,11 @@
+import GameObject from "./GameObject";
+import Character from "./Character";
 import playerRunFrame1Url from './res/player_run_frame_1.png'
 import playerRunFrame2Url from './res/player_run_frame_2.png'
 
-import GameObject from "./GameObject";
-import Character from "./Character";
 import Player from "./Player";
 
-export default class Jotun extends Player
+export default class Necromancer extends Player
 {
 	sprite: PIXI.extras.AnimatedSprite
 
