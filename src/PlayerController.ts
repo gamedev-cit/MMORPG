@@ -20,6 +20,9 @@ export default class PlayerController
 
 	update()
 	{
+        this.player.speedX = this.player.speedX * 0.8
+        this.player.speedY = this.player.speedY * 0.8
+
 		if (this.keyboardManager.isDown("ArrowRight") || this.keyboardManager.isDown("KeyD")) {
 			this.player.speedX = 2
 		}
