@@ -35,8 +35,6 @@ export default class GameObject extends PIXI.Sprite
 
     update()
 	{
-        this.speedY += 0.7
-
 		this.x += this.speedX
 		this.y += this.speedY
     }
