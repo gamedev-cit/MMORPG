@@ -3,6 +3,8 @@ import GameStage from "./GameStage"
 
 export default class GameObject extends PIXI.Sprite
 {
+    id = '123'
+    
 	speedX: number = 0
 	speedY: number = 0
     radius: number

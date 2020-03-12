@@ -45,8 +45,32 @@ export default class GameStage extends Stage
 	onGameState(state: any)
 	{
 		this.debugLabel.text = JSON.stringify(state, null, "    ");
+
+		this.player.id = this.socket.id;
+
+		for (let characterData of state.characters) {
+			if (characterData.id == this.player.id) {
+				continue;
+			}
+			var character = this.getCharacterWithId(characterData.id)!
+			character.x = characterData.position.x
+			character.y = characterData.position.y
+			character.speedX = characterData.speed.x
+			character.speedY = characterData.speed.y
+			
+		}
 	}
 
+	getCharacterWithId(id: String): Character | null
+	{
+		for (let character of this.characters) {
+			if (character.id == id) {
+				return character
+			}
+		}
+
+		return null
+	}
 	update()
 	{
 		this.socket.emit("character", {
