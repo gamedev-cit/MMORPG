@@ -1,5 +1,5 @@
 import GameObject from "./GameObject";
-import Character from "./GameObject";
+import Character from "./Character";
 
 export default class Player extends Character
 {
