@@ -47,6 +47,7 @@ export default class GameStage extends Stage
 		this.debugLabel.text = JSON.stringify(state, null, "    ");
 
 		this.player.id = this.socket.id;
+		this.addNewCharacters(state)
 
 		for (let characterData of state.characters) {
 			if (characterData.id == this.player.id) {
@@ -60,6 +61,16 @@ export default class GameStage extends Stage
 			
 		}
 	}
+	addNewCharacters(state: any)
+	{
+		for (let characterData of state.characters) {
+			if (this.getCharacterWithId(characterData.id) == null) {
+				var newPlayer = new Player(characterData.radius)
+				this.addChild(newPlayer)
+			}
+		}
+	}
+
 
 	getCharacterWithId(id: String): Character | null
 	{
