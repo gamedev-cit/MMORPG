@@ -4,6 +4,7 @@ import GameObject from './GameObject';
 import Character from './Character';
 import Player from './Player';
 import Knight from './Knight';
+import PlayerController from './PlayerController';
 
 
 export default class GameStage extends Stage
@@ -15,6 +16,8 @@ export default class GameStage extends Stage
 
 	player: Player
 
+	playerController: PlayerController
+
 	constructor()
 	{
 		super()
@@ -22,6 +25,8 @@ export default class GameStage extends Stage
 		GameStage.instance = this
 
 		this.player = new Knight()
+
+		this.playerController = new PlayerController(this.player)
 
 		this.addChild(this.player)	
 	}
