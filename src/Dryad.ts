@@ -1,6 +1,5 @@
 import Player from "./Player"
-import playerRunFrame1Url from './res/player_run_frame_1.png'
-import playerRunFrame2Url from './res/player_run_frame_2.png'
+import playerRunFrame1Url from './res/player_run_dryad_frame_1.png'
 
 
 export default class Dryad extends Player 
@@ -12,8 +11,7 @@ export default class Dryad extends Player
 		super(40)
 
 		this.sprite = new PIXI.extras.AnimatedSprite([
-			PIXI.Texture.from(playerRunFrame1Url),
-			PIXI.Texture.from(playerRunFrame2Url)
+			PIXI.Texture.from(playerRunFrame1Url)
 		])
 		this.sprite.anchor.x = 0.5
 		this.sprite.anchor.y = 0.5
