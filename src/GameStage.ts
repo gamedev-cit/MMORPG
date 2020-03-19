@@ -149,7 +149,7 @@ export default class GameStage extends Stage
 				"y": this.player.speedY
 			},
 			"radius": this.player.radius,
-			"type": "player"
+			"type": this.player.type
 		})
 	}
 }

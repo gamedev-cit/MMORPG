@@ -3,7 +3,8 @@ import Player from "./Player";
 
 export default class JJmans extends Player
 {
-    sprite: PIXI.extras.AnimatedSprite
+	sprite: PIXI.extras.AnimatedSprite
+	type="jjman"
 
 	constructor()
 	{

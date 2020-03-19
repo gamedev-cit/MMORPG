@@ -3,7 +3,8 @@ import Player from "./Player";
 
 export default class HumanSpider extends Player
 {
-    sprite: PIXI.extras.AnimatedSprite
+	sprite: PIXI.extras.AnimatedSprite
+	type="spider"
 
 	constructor()
 	{
