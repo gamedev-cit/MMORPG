@@ -6,6 +6,13 @@ import Character from './Character';
 import Player from './Player';
 import Knight from './Knight';
 import PlayerController from './PlayerController';
+import Dryad from './Dryad';
+import Dwarf from './Dwarf';
+import JJmans from './JJmans';
+import Jotun from './Jotun';
+import Necromancer from './Necromancer';
+import Bee from './Bee';
+import HumanSpider from './HumanSpider';
 
 
 export default class GameStage extends Stage
@@ -22,7 +29,7 @@ export default class GameStage extends Stage
 
 	debugLabel = new PIXI.Text()
 
-	constructor()
+	constructor(playerType: string)
 	{
 		super()
 
@@ -32,7 +39,8 @@ export default class GameStage extends Stage
 
 		this.socket.on("state", (state: any) => this.onGameState(state))
 
-		this.player = new Knight()
+		this.player = this.newPlayerWithType(playerType)
+
 		this.playerController = new PlayerController(this.player)
 
 		this.addChild(this.player)
@@ -40,6 +48,35 @@ export default class GameStage extends Stage
 		this.debugLabel.style.fill = 0xffffff
 		this.debugLabel.style.fontSize = 12
 		this.addChild(this.debugLabel)
+	}
+
+	newPlayerWithType(type: string): Player
+	{
+		if (type == "dryad") {
+			return new Dryad()
+		}
+		if (type == "dwarf") {
+			return new Dwarf()
+		}
+		if (type == "jjman") {
+			return new JJmans()
+		}
+		if (type == "jotun") {
+			return new Jotun()
+		}
+		if (type == "knight") {
+			return new Knight()
+		}
+		if (type == "necromancer") {
+			return new Necromancer()
+		}
+		if (type == "shmel") {
+			return new Bee()
+		}
+		if (type == "spider") {
+			return new HumanSpider()
+		}
+		return new Knight()
 	}
 
 	onGameState(state: any)
@@ -62,6 +99,7 @@ export default class GameStage extends Stage
 			
 		}
 	}
+
 	addNewCharacters(state: any)
 	{
 		for (let characterData of state.characters) {
@@ -72,6 +110,7 @@ export default class GameStage extends Stage
 			}
 		}
 	}
+
 	removeOldCharacters(state: any)
 	{
 		for (let character of this.characters) {
@@ -85,7 +124,7 @@ export default class GameStage extends Stage
 			if (!exists && character != this.player) {
 				this.removeChild(character)
 			}
-		}	
+		}
 	}
 
 	getCharacterWithId(id: String): Character | null
