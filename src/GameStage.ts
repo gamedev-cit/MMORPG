@@ -48,6 +48,7 @@ export default class GameStage extends Stage
 
 		this.player.id = this.socket.id;
 		this.addNewCharacters(state)
+		this.removeOldCharacters(state)
 
 		for (let characterData of state.characters) {
 			if (characterData.id == this.player.id) {
@@ -71,7 +72,21 @@ export default class GameStage extends Stage
 			}
 		}
 	}
+	removeOldCharacters(state: any)
+	{
+		for (let character of this.characters) {
+			var exists = false
+			for (let characterData of state.characters) {
+				if (characterData.id == character.id) {
+					exists = true
+				}
+			}
 
+			if (!exists && character != this.player) {
+				this.removeChild(character)
+			}
+		}	
+	}
 
 	getCharacterWithId(id: String): Character | null
 	{
