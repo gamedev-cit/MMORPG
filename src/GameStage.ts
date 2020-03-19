@@ -21,6 +21,7 @@ export default class GameStage extends Stage
 
 	socket: SocketIOClient.Socket
 
+	world = new PIXI.Container()
 	gameObjects = new Array<GameObject>()
 	characters = new Array<Character>()
 
@@ -42,8 +43,8 @@ export default class GameStage extends Stage
 		this.player = this.newPlayerWithType(playerType)
 
 		this.playerController = new PlayerController(this.player)
-
-		this.addChild(this.player)
+		this.addChild(this.world)
+		this.world.addChild(this.player)
 
 		this.debugLabel.style.fill = 0xffffff
 		this.debugLabel.style.fontSize = 12
@@ -106,7 +107,7 @@ export default class GameStage extends Stage
 			if (this.getCharacterWithId(characterData.id) == null) {
 				var newPlayer = this.newPlayerWithType(characterData.type)
 				newPlayer.id = characterData.id
-				this.addChild(newPlayer)
+				this.world.addChild(newPlayer)
 			}
 		}
 	}
@@ -122,7 +123,7 @@ export default class GameStage extends Stage
 			}
 
 			if (!exists && character != this.player) {
-				this.removeChild(character)
+				this.world.removeChild(character)
 			}
 		}
 	}
