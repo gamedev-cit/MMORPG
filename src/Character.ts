@@ -3,6 +3,9 @@ import GameStage from "./GameStage";
 
 export default class Character extends GameObject
 {
+	type= "unknown"
+
+
 	onAdded()
 	{
 		super.onAdded()

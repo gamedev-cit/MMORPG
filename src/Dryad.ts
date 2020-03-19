@@ -4,7 +4,8 @@ import playerRunFrame1Url from './res/player_run_dryad_frame_1.png'
 
 export default class Dryad extends Player 
 {
-    sprite: PIXI.extras.AnimatedSprite
+	sprite: PIXI.extras.AnimatedSprite
+	type = "dryad"
 
 	constructor()
 	{

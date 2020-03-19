@@ -7,6 +7,7 @@ import Player from "./Player";
 export default class Necromancer extends Player
 {
 	sprite: PIXI.extras.AnimatedSprite
+	type="necromancer"
 
 	constructor()
 	{

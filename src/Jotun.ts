@@ -4,6 +4,7 @@ import Player from "./Player";
 export default class Jotun extends Player
 {
 	sprite: PIXI.extras.AnimatedSprite
+	type="jotun"
 
 	constructor()
 	{

@@ -104,7 +104,7 @@ export default class GameStage extends Stage
 	{
 		for (let characterData of state.characters) {
 			if (this.getCharacterWithId(characterData.id) == null) {
-				var newPlayer = new Knight()
+				var newPlayer = this.newPlayerWithType(characterData.type)
 				newPlayer.id = characterData.id
 				this.addChild(newPlayer)
 			}
@@ -149,7 +149,7 @@ export default class GameStage extends Stage
 				"y": this.player.speedY
 			},
 			"radius": this.player.radius,
-			"type": "player"
+			"type": this.player.type
 		})
 	}
 }

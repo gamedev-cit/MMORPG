@@ -4,7 +4,8 @@ import Player from "./Player";
 
 export default class Bee extends Player
 {
-    sprite: PIXI.extras.AnimatedSprite
+	sprite: PIXI.extras.AnimatedSprite
+	type="shmel"
 
 	constructor()
 	{

@@ -5,6 +5,7 @@ import Player from "./Player";
 export default class Knight extends Player
 {
 	sprite: PIXI.extras.AnimatedSprite
+	type="knight"
 
 	constructor()
 	{
