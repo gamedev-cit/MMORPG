@@ -1,4 +1,4 @@
-import playerRunFrame1Url from './res/player_run_jjman_frame_1.png'
+import playerRunFrame1Url from './res/JJplayer.png'
 import Player from "./Player";
 
 export default class JJmans extends Player
