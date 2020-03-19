@@ -13,6 +13,7 @@ import Jotun from './Jotun';
 import Necromancer from './Necromancer';
 import Bee from './Bee';
 import HumanSpider from './HumanSpider';
+import Main from './Main';
 
 
 export default class GameStage extends Stage
@@ -152,5 +153,13 @@ export default class GameStage extends Stage
 			"radius": this.player.radius,
 			"type": this.player.type
 		})
+	
+		this.moveCamera()
+	}
+
+	moveCamera()
+	{
+		this.world.x = -this.player.x + Main.instance.app.renderer.width*0.5
+		this.world.y = -this.player.y + Main.instance.app.renderer.height*0.5
 	}
 }
