@@ -22,7 +22,7 @@ export default class GameStage extends Stage
 
 	debugLabel = new PIXI.Text()
 
-	constructor()
+	constructor(playerType: string)
 	{
 		super()
 
@@ -62,6 +62,7 @@ export default class GameStage extends Stage
 			
 		}
 	}
+
 	addNewCharacters(state: any)
 	{
 		for (let characterData of state.characters) {
@@ -72,6 +73,7 @@ export default class GameStage extends Stage
 			}
 		}
 	}
+
 	removeOldCharacters(state: any)
 	{
 		for (let character of this.characters) {
@@ -85,7 +87,7 @@ export default class GameStage extends Stage
 			if (!exists && character != this.player) {
 				this.removeChild(character)
 			}
-		}	
+		}
 	}
 
 	getCharacterWithId(id: String): Character | null
