@@ -38,5 +38,12 @@ export default class PlayerController
 		if (this.keyboardManager.isDown("ArrowDown") || this.keyboardManager.isDown("KeyS")) {
 			this.player.speedY = 2
 		}
+
+		if (this.mouseManager.mouseDown) {
+			this.player.fire(
+				this.mouseManager.mouseX - GameStage.instance.world.x,
+				this.mouseManager.mouseY - GameStage.instance.world.y
+			)
+		}
 	}
 }
