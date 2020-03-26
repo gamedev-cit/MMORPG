@@ -36,7 +36,7 @@ export default class GameStage extends Stage
 	{
 		super()
 
-		
+
 		GameStage.instance = this
 
 		this.socket = io.connect('wss://game-socket-server-1.appspot.com')
@@ -103,7 +103,9 @@ export default class GameStage extends Stage
 			character.y = characterData.position.y
 			character.speedX = characterData.speed.x
 			character.speedY = characterData.speed.y
-			
+			character.isFiring = characterData.isFiring
+			character.fireTargetX = characterData.fireTargetX
+			character.fireTargetY = characterData.fireTargetY
 		}
 	}
 

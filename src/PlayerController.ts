@@ -40,10 +40,11 @@ export default class PlayerController
 		}
 
 		if (this.mouseManager.mouseDown) {
-			this.player.fire(
-				this.mouseManager.mouseX - GameStage.instance.world.x,
-				this.mouseManager.mouseY - GameStage.instance.world.y
-			)
+			this.player.isFiring = true
+			this.player.fireTargetX = this.mouseManager.mouseX - GameStage.instance.world.x;
+			this.player.fireTargetY = this.mouseManager.mouseY - GameStage.instance.world.y;
+		} else {
+			this.player.isFiring = false
 		}
 	}
 }
