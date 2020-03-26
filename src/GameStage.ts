@@ -156,7 +156,10 @@ export default class GameStage extends Stage
 				"y": this.player.speedY
 			},
 			"radius": this.player.radius,
-			"type": this.player.type
+			"type": this.player.type,
+			"isFiring": this.player.isFiring,
+			"fireTargetX": this.player.fireTargetX,
+			"fireTargetY": this.player.fireTargetY
 		})
 	
 		this.moveCamera()
