@@ -2,11 +2,13 @@ import GameObject from "./GameObject";
 import GameStage from "./GameStage";
 import Bullet from "./Bullet";
 
-
 export default class Character extends GameObject
 {
-	type= "unknown"
+	type = "unknown"
 
+	lastFireTime = 0
+    fireRate = 50
+	bulletSpeed = 8
 
 	onAdded()
 	{
@@ -24,12 +26,23 @@ export default class Character extends GameObject
 			GameStage.instance.characters.splice(index, 1)
 		}
 	}
-	
+
 	fire(targetX: number, targetY: number)
 	{
-		var bullet = new Bullet(this, 2, 2)
-		bullet.x = this.x
-		bullet.y = this.y
-		GameStage.instance.world.addChildAt(bullet, 1)
+		var timeSinceLastFire = (new Date()).getTime() - this.lastFireTime
+		if (timeSinceLastFire > this.fireRate) {
+			let dx = targetX - this.x
+			let dy = targetY - this.y
+			var length = Math.sqrt(dx*dx + dy*dy)
+			let speedX = dx/length * this.bulletSpeed
+			let speedY = dy/length * this.bulletSpeed
+
+			var bullet = new Bullet(this, speedX, speedY)
+			bullet.x = this.x
+			bullet.y = this.y
+			GameStage.instance.world.addChildAt(bullet, 1)
+
+			this.lastFireTime = (new Date()).getTime()
+		}
 	}
 }
