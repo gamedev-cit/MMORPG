@@ -10,6 +10,10 @@ export default class Character extends GameObject
     fireRate = 50
 	bulletSpeed = 8
 
+	isFiring = false
+	fireTargetX = 0
+	fireTargetY = 0
+
 	onAdded()
 	{
 		super.onAdded()
@@ -24,6 +28,15 @@ export default class Character extends GameObject
 		let index = GameStage.instance.characters.indexOf(this)
 		if (index != -1) {
 			GameStage.instance.characters.splice(index, 1)
+		}
+	}
+
+	update()
+	{
+		super.update()
+
+		if (this.isFiring) {
+			this.fire(this.fireTargetX, this.fireTargetY)
 		}
 	}
 
