@@ -14,6 +14,7 @@ import Necromancer from './Necromancer';
 import Bee from './Bee';
 import HumanSpider from './HumanSpider';
 import Main from './Main';
+import map1Url from './res/map_1.jpg'
 
 
 export default class GameStage extends Stage
@@ -40,6 +41,9 @@ export default class GameStage extends Stage
 		this.socket = io.connect('wss://game-socket-server-1.appspot.com')
 
 		this.socket.on("state", (state: any) => this.onGameState(state))
+
+		var background = new PIXI.Sprite(PIXI.Texture.fromImage(map1Url))
+		this.world.addChild(background)
 
 		this.player = this.newPlayerWithType(playerType)
 
