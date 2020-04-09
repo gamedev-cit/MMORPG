@@ -120,6 +120,7 @@ export default class GameStage extends Stage
 			character.isFiring = characterData.isFiring
 			character.fireTargetX = characterData.fireTargetX
 			character.fireTargetY = characterData.fireTargetY
+			character.health = characterData.health
 		}
 	}
 
