@@ -27,10 +27,12 @@ export default class GameStage extends Stage
 	gameObjects = new Array<GameObject>()
 	characters = new Array<Character>()
 
-	player: Player
-	playerController: PlayerController
+	player!: Player
+	playerController!: PlayerController
 
 	debugLabel = new PIXI.Text()
+
+	playerType: string
 
 	constructor(playerType: string)
 	{
@@ -39,6 +41,8 @@ export default class GameStage extends Stage
 
 		GameStage.instance = this
 
+		this.playerType = playerType
+
 		this.socket = io.connect('wss://game-socket-server-1.appspot.com')
 
 		this.socket.on("state", (state: any) => this.onGameState(state))
@@ -46,15 +50,25 @@ export default class GameStage extends Stage
 		var background = new PIXI.Sprite(PIXI.Texture.fromImage(map1Url))
 		this.world.addChild(background)
 
-		this.player = this.newPlayerWithType(playerType)
-
-		this.playerController = new PlayerController(this.player)
 		this.addChild(this.world)
-		this.world.addChild(this.player)
+
+		this.respawn()
 
 		this.debugLabel.style.fill = 0xffffff
 		this.debugLabel.style.fontSize = 12
 		this.addChild(this.debugLabel)
+	}
+
+	respawn()
+	{
+		this.world.removeChild(this.player)
+
+		this.player = this.newPlayerWithType(this.playerType)
+		this.player.x = 3000 + (Math.random()*1000 - 500)
+		this.player.y = 3000 + (Math.random()*1000 - 500)
+
+		this.playerController = new PlayerController(this.player)
+		this.world.addChild(this.player)
 	}
 
 	newPlayerWithType(type: string): Player
@@ -163,9 +177,11 @@ export default class GameStage extends Stage
 
 		return null
 	}
+
 	update()
 	{
 		this.collideGameObjectsWithGameObjects()
+		this.checkPlayerHealth()
 
 		this.socket.emit("character", {
 			"position": {
@@ -185,6 +201,13 @@ export default class GameStage extends Stage
 		})
 	
 		this.moveCamera()
+	}
+
+	checkPlayerHealth()
+	{
+		if (this.player.health <= 0) {
+			this.respawn()
+		}
 	}
 
 	moveCamera()
