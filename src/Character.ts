@@ -15,12 +15,17 @@ export default class Character extends GameObject
 	fireTargetY = 0
 
 	health = 100
+	fullHealth = 100
+
+	healthBar = new PIXI.Graphics()
 
 	onAdded()
 	{
 		super.onAdded()
 
 		GameStage.instance.characters.push(this)
+		
+		this.addChild(this.healthBar)
 	}
 
 	onRemoved()
@@ -40,6 +45,16 @@ export default class Character extends GameObject
 		if (this.isFiring) {
 			this.fire(this.fireTargetX, this.fireTargetY)
 		}
+
+		this.healthBar.clear()
+
+		var healthBarWidth = 70 * this.health / this.fullHealth
+		if (healthBarWidth < 1) {
+			healthBarWidth = 1
+		}
+		this.healthBar.beginFill(0xcf7070)
+		this.healthBar.drawRect(-35, -60, healthBarWidth, 8)
+		this.healthBar.endFill()
 	}
 
 	fire(targetX: number, targetY: number)
