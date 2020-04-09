@@ -136,6 +136,23 @@ export default class GameStage extends Stage
 		}
 	}
 
+	collideGameObjectsWithGameObjects()
+    {
+		for (let gameObjectA of this.gameObjects) {
+            for (let gameObjectB of this.gameObjects) {
+                if (gameObjectA === gameObjectB) {
+                    continue
+                }
+                let deltaX = gameObjectA.x - gameObjectB.x
+                let deltaY = gameObjectA.y - gameObjectB.y
+                let distance = Math.sqrt(deltaX*deltaX + deltaY*deltaY)
+                if (distance < gameObjectA.radius + gameObjectB.radius) {
+					gameObjectA.didHitGameObject(gameObjectB)
+                }
+            }
+        }
+	}
+
 	getCharacterWithId(id: String): Character | null
 	{
 		for (let character of this.characters) {
@@ -148,6 +165,8 @@ export default class GameStage extends Stage
 	}
 	update()
 	{
+		this.collideGameObjectsWithGameObjects()
+
 		this.socket.emit("character", {
 			"position": {
 				"x": this.player.x,

@@ -23,4 +23,13 @@ export default class Bullet extends GameObject
             GameStage.instance.world.removeChild(this)
         }, this.lifetime)
 	}
+
+	didHitGameObject(gameObject: GameObject)
+	{
+		if (this.owner == gameObject) {
+			return
+		}
+
+		GameStage.instance.world.removeChild(this)
+	}
 }
