@@ -14,6 +14,8 @@ export default class Character extends GameObject
 	fireTargetX = 0
 	fireTargetY = 0
 
+	health = 100
+
 	onAdded()
 	{
 		super.onAdded()

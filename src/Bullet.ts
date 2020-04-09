@@ -7,6 +7,7 @@ export default class Bullet extends GameObject
 {
 	owner: Character
 
+	damage = 10
 	lifetime = 500
 
 	constructor(owner: Character, speedX: number, speedY: number)
@@ -28,6 +29,10 @@ export default class Bullet extends GameObject
 	{
 		if (this.owner == gameObject) {
 			return
+		}
+
+		if (gameObject == GameStage.instance.player) {
+			GameStage.instance.player.health -= this.damage
 		}
 
 		GameStage.instance.world.removeChild(this)
