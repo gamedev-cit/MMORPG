@@ -20,6 +20,6 @@ export default class HumanSpider extends Player
 		this.addChild(this.sprite)
 
 		this.sprite.gotoAndPlay(0)
-		this.sprite.animationSpeed = 0.2
+		this.sprite.animationSpeed = 0.15
 	}
 }
