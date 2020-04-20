@@ -26,7 +26,7 @@ import playerRunFrame23Url from './res/player_run_dwarf_frame_23.png'
 export default class Dwarf extends Player 
 {
 	sprite: PIXI.extras.AnimatedSprite
-	type="dworf"
+	type="dwarf"
 
 	constructor()
 	{
