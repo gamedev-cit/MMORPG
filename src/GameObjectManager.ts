@@ -8,6 +8,7 @@ import Necromancer from "./Necromancer";
 import Bee from "./Bee";
 import HumanSpider from "./HumanSpider";
 import GameObject from "./GameObject";
+import HealthKit from "./items/HealthKit";
 
 export default class GameObjectManager
 {
@@ -88,6 +89,11 @@ export default class GameObjectManager
 		}
 		if (type == "spider") {
 			return new HumanSpider()
+		}
+
+
+		if (type == "healkit") {
+			return new HealthKit()
 		}
 
 		return new Knight()
