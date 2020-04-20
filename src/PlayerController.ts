@@ -7,6 +7,7 @@ import Main from "./Main";
 export default class PlayerController
 {
 	player: Character
+	
 
 	keyboardManager = new KeyboardManager()
 	mouseManager = new MouseManager(GameStage.instance)
