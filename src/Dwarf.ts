@@ -25,7 +25,6 @@ import playerRunFrame23Url from './res/player_run_dwarf_frame_23.png'
 
 export default class Dwarf extends Player 
 {
-	sprite: PIXI.extras.AnimatedSprite
 	type="dwarf"
 
 	constructor()
@@ -61,7 +60,6 @@ export default class Dwarf extends Player
 		this.sprite.anchor.y = 0.5
 		this.addChild(this.sprite)
 
-		this.sprite.gotoAndPlay(0)
 		this.sprite.animationSpeed = 1
 	}
 }

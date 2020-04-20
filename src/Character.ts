@@ -19,6 +19,8 @@ export default class Character extends GameObject
 
 	healthBar = new PIXI.Graphics()
 
+	sprite!: PIXI.extras.AnimatedSprite
+
 	onAdded()
 	{
 		super.onAdded()
@@ -55,6 +57,8 @@ export default class Character extends GameObject
 		this.healthBar.beginFill(0xcf7070)
 		this.healthBar.drawRect(-35, -60, healthBarWidth, 8)
 		this.healthBar.endFill()
+
+		this.animateCharacter()
 	}
 
 	fire(targetX: number, targetY: number)
@@ -86,5 +90,21 @@ export default class Character extends GameObject
 		this.fireTargetX = data.fireTargetX
 		this.fireTargetY = data.fireTargetY
 		this.health = data.health
+	}
+
+	animateCharacter()
+	{
+		if (Math.abs(this.speedX) < 0.4 && Math.abs(this.speedY) < 0.4) {
+			this.sprite.stop()
+		} else if (!this.sprite.playing) {
+			this.sprite.gotoAndPlay(0)
+		}
+
+		if (this.speedX < 0) {
+			this.sprite.scale.x = -1
+		}
+		if (this.speedX > 0) {
+			this.sprite.scale.x = 1
+		}
 	}
 }
