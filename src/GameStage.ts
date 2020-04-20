@@ -15,7 +15,8 @@ import Bee from './Bee';
 import HumanSpider from './HumanSpider';
 import Main from './Main';
 import map1Url from './res/map_1.jpg'
-
+import GameObjectManager from './GameObjectManager';
+import Item from './Item'
 
 export default class GameStage extends Stage
 {
@@ -26,9 +27,11 @@ export default class GameStage extends Stage
 	world = new PIXI.Container()
 	gameObjects = new Array<GameObject>()
 	characters = new Array<Character>()
+	items = new Array<Item>()
 
 	player!: Player
 	playerController!: PlayerController
+	gameObjectManager = new GameObjectManager()
 
 	debugLabel = new PIXI.Text()
 
@@ -63,7 +66,7 @@ export default class GameStage extends Stage
 	{
 		this.world.removeChild(this.player)
 
-		this.player = this.newPlayerWithType(this.playerType)
+		this.player = this.gameObjectManager.newObjectWithType(this.playerType) as Player
 		this.player.x = 3000 + (Math.random()*1000 - 500)
 		this.player.y = 3000 + (Math.random()*1000 - 500)
 
@@ -71,84 +74,14 @@ export default class GameStage extends Stage
 		this.world.addChild(this.player)
 	}
 
-	newPlayerWithType(type: string): Player
-	{
-		if (type == "dryad") {
-			return new Dryad()
-		}
-		if (type == "dwarf") {
-			return new Dwarf()
-		}
-		if (type == "jjman") {
-			return new JJmans()
-		}
-		if (type == "jotun") {
-			return new Jotun()
-		}
-		if (type == "knight") {
-			return new Knight()
-		}
-		if (type == "necromancer") {
-			return new Necromancer()
-		}
-		if (type == "shmel") {
-			return new Bee()
-		}
-		if (type == "spider") {
-			return new HumanSpider()
-		}
-		return new Knight()
-	}
-
 	onGameState(state: any)
 	{
 		this.debugLabel.text = JSON.stringify(state, null, "    ");
 
 		this.player.id = this.socket.id;
-		this.addNewCharacters(state)
-		this.removeOldCharacters(state)
-
-		for (let characterData of state.characters) {
-			if (characterData.id == this.player.id) {
-				continue;
-			}
-			var character = this.getCharacterWithId(characterData.id)!
-			character.x = characterData.position.x
-			character.y = characterData.position.y
-			character.speedX = characterData.speed.x
-			character.speedY = characterData.speed.y
-			character.isFiring = characterData.isFiring
-			character.fireTargetX = characterData.fireTargetX
-			character.fireTargetY = characterData.fireTargetY
-			character.health = characterData.health
-		}
-	}
-
-	addNewCharacters(state: any)
-	{
-		for (let characterData of state.characters) {
-			if (this.getCharacterWithId(characterData.id) == null) {
-				var newPlayer = this.newPlayerWithType(characterData.type)
-				newPlayer.id = characterData.id
-				this.world.addChild(newPlayer)
-			}
-		}
-	}
-
-	removeOldCharacters(state: any)
-	{
-		for (let character of this.characters) {
-			var exists = false
-			for (let characterData of state.characters) {
-				if (characterData.id == character.id) {
-					exists = true
-				}
-			}
-
-			if (!exists && character != this.player) {
-				this.world.removeChild(character)
-			}
-		}
+		
+		this.gameObjectManager.updateObjectsWithGameState(this.characters, state.characters)
+		this.gameObjectManager.updateObjectsWithGameState(this.items, state.items)
 	}
 
 	collideGameObjectsWithGameObjects()
@@ -166,17 +99,6 @@ export default class GameStage extends Stage
                 }
             }
         }
-	}
-
-	getCharacterWithId(id: String): Character | null
-	{
-		for (let character of this.characters) {
-			if (character.id == id) {
-				return character
-			}
-		}
-
-		return null
 	}
 
 	update()
