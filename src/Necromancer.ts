@@ -26,4 +26,12 @@ export default class Necromancer extends Player
 		this.sprite.gotoAndPlay(0)
 		this.sprite.animationSpeed = 0.05
 	}
+	animateCharacter(){
+		if (this.speedX < 0) {
+			this.sprite.scale.x = -1
+		}
+		if (this.speedX > 0) {
+			this.sprite.scale.x = 1
+		}
+	}
 }
