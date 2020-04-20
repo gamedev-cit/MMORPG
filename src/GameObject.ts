@@ -45,4 +45,9 @@ export default class GameObject extends PIXI.Sprite
     {
         
     }
+
+    updateWithData(data: any): void
+    {
+        
+    }
 }

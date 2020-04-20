@@ -75,4 +75,16 @@ export default class Character extends GameObject
 			this.lastFireTime = (new Date()).getTime()
 		}
 	}
+
+	updateWithData(data: any): void
+	{
+		this.x = data.position.x
+		this.y = data.position.y
+		this.speedX = data.speed.x
+		this.speedY = data.speed.y
+		this.isFiring = data.isFiring
+		this.fireTargetX = data.fireTargetX
+		this.fireTargetY = data.fireTargetY
+		this.health = data.health
+	}
 }
