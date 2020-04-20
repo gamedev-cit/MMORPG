@@ -17,6 +17,7 @@ import Main from './Main';
 import map1Url from './res/map_1.jpg'
 import GameObjectManager from './GameObjectManager';
 import Item from './Item'
+import Hospital from './buildings/Hospital';
 
 export default class GameStage extends Stage
 {
@@ -57,9 +58,19 @@ export default class GameStage extends Stage
 
 		this.respawn()
 
+		this.loadMap()
+
 		this.debugLabel.style.fill = 0xffffff
 		this.debugLabel.style.fontSize = 12
 		this.addChild(this.debugLabel)
+	}
+
+	loadMap()
+	{
+		var hospital = new Hospital()
+		hospital.x = 3000
+		hospital.y = 3000
+		this.world.addChild(hospital)
 	}
 
 	respawn()
@@ -67,8 +78,8 @@ export default class GameStage extends Stage
 		this.world.removeChild(this.player)
 
 		this.player = this.gameObjectManager.newObjectWithType(this.playerType) as Player
-		this.player.x = 3000 + (Math.random()*1000 - 500)
-		this.player.y = 3000 + (Math.random()*1000 - 500)
+		this.player.x = 3000 + (Math.random()*500 - 250)
+		this.player.y = 3000 + (Math.random()*500 - 250)
 
 		this.playerController = new PlayerController(this.player)
 		this.world.addChild(this.player)
