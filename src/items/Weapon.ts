@@ -24,6 +24,18 @@ export default class Weapon
 		this.itemImageUrl = data.itemImageUrl
 	}
 
+	data(): any {
+		return {
+			"fireRate": this.fireRate,
+			"bulletSpeed": this.bulletSpeed,
+			"bulletLifetime": this.bulletLifetime,
+			"damage": this.damage,
+			"bulletRadius": this.bulletRadius,
+			"bulletImageUrl": this.bulletImageUrl,
+			"itemImageUrl": this.itemImageUrl
+		}
+	}
+
 	//--------------------------------------------
 
 	static magicBalls = new Weapon({

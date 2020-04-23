@@ -1,4 +1,4 @@
-import Item from "../Item";
+import Item from "./Item";
 import itemUrl from '../res/health_pack.png'
 import GameObject from "../GameObject";
 import GameStage from "../GameStage";

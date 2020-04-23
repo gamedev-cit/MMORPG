@@ -1,5 +1,5 @@
-import GameObject from "./GameObject";
-import GameStage from "./GameStage";
+import GameObject from "../GameObject";
+import GameStage from "../GameStage";
 
 export default class Item extends GameObject
 {
