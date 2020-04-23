@@ -7,7 +7,7 @@ export default class Character extends GameObject
 {
 	type = "unknown"
 
-	weapon: Weapon = Weapon.sword
+	weapon: Weapon = Weapon.magicBalls
 
 	lastFireTime = 0
 
