@@ -47,7 +47,7 @@ export default class GameStage extends Stage
 
 		this.playerType = playerType
 
-		this.socket = io.connect('wss://game-socket-server-1.appspot.com')
+		this.socket = io.connect('wss://game-socket-server-1.herokuapp.com')
 
 		this.socket.on("state", (state: any) => this.onGameState(state))
 
