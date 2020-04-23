@@ -16,8 +16,9 @@ import HumanSpider from './HumanSpider';
 import Main from './Main';
 import map1Url from './res/map_1.jpg'
 import GameObjectManager from './GameObjectManager';
-import Item from './Item'
+import Item from './items/Item'
 import Hospital from './buildings/Hospital';
+import Forge from './buildings/Forge';
 
 export default class GameStage extends Stage
 {
@@ -68,9 +69,14 @@ export default class GameStage extends Stage
 	loadMap()
 	{
 		var hospital = new Hospital()
-		hospital.x = 3000
+		hospital.x = 3200
 		hospital.y = 3000
 		this.world.addChild(hospital)
+
+		var forge = new Forge()
+		forge.x = 2700
+		forge.y = 3000
+		this.world.addChild(forge)
 	}
 
 	respawn()
@@ -131,7 +137,8 @@ export default class GameStage extends Stage
 			"isFiring": this.player.isFiring,
 			"fireTargetX": this.player.fireTargetX,
 			"fireTargetY": this.player.fireTargetY,
-			"health": this.player.health
+			"health": this.player.health,
+			"weapon": this.player.weapon.data()
 		})
 	
 		this.moveCamera()
