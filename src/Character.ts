@@ -1,14 +1,15 @@
 import GameObject from "./GameObject";
 import GameStage from "./GameStage";
 import Bullet from "./Bullet";
+import Weapon from "./items/Weapon";
 
 export default class Character extends GameObject
 {
 	type = "unknown"
 
+	weapon: Weapon = Weapon.sword
+
 	lastFireTime = 0
-    fireRate = 50
-	bulletSpeed = 8
 
 	isFiring = false
 	fireTargetX = 0
@@ -64,16 +65,17 @@ export default class Character extends GameObject
 	fire(targetX: number, targetY: number)
 	{
 		var timeSinceLastFire = (new Date()).getTime() - this.lastFireTime
-		if (timeSinceLastFire > this.fireRate) {
+		if (timeSinceLastFire > this.weapon.fireRate) {
 			let dx = targetX - this.x
 			let dy = targetY - this.y
 			var length = Math.sqrt(dx*dx + dy*dy)
-			let speedX = dx/length * this.bulletSpeed
-			let speedY = dy/length * this.bulletSpeed
+			let speedX = dx/length * this.weapon.bulletSpeed
+			let speedY = dy/length * this.weapon.bulletSpeed
 
-			var bullet = new Bullet(this, speedX, speedY)
-			bullet.x = this.x
-			bullet.y = this.y
+			var bullet = new Bullet(this, speedX, speedY, this.weapon.damage, this.weapon.bulletLifetime, this.weapon.bulletImageUrl)
+			bullet.x = this.x + dx/length * (this.radius + 30)
+			bullet.y = this.y + dy/length * (this.radius + 30)
+			bullet.rotation = Math.atan2(dy, dx)
 			GameStage.instance.world.addChildAt(bullet, 1)
 
 			this.lastFireTime = (new Date()).getTime()

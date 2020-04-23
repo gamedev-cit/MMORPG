@@ -15,6 +15,8 @@ export default class GameObject extends PIXI.Sprite
 		super()
 
         this.radius = radius
+        this.anchor.x = 0.5
+        this.anchor.y = 0.5
         
         this.on("added", this.onAdded, this)
 		this.on("removed", this.onRemoved, this)

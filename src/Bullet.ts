@@ -10,12 +10,14 @@ export default class Bullet extends GameObject
 	damage = 10
 	lifetime = 500
 
-	constructor(owner: Character, speedX: number, speedY: number)
+	constructor(owner: Character, speedX: number, speedY: number, damage: number, lifetime: number, bulletImageUrl: string)
 	{
 		super(10)
 
-		this.texture = PIXI.Texture.fromImage(bulletUrl)
+		this.texture = PIXI.Texture.fromImage(bulletImageUrl)
 		
+		this.damage = damage
+		this.lifetime = lifetime
 		this.owner = owner
 		this.speedX = speedX
 		this.speedY = speedY
