@@ -137,7 +137,8 @@ export default class GameStage extends Stage
 			"isFiring": this.player.isFiring,
 			"fireTargetX": this.player.fireTargetX,
 			"fireTargetY": this.player.fireTargetY,
-			"health": this.player.health
+			"health": this.player.health,
+			"weapon": this.player.weapon.data()
 		})
 	
 		this.moveCamera()

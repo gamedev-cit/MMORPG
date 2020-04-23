@@ -92,6 +92,8 @@ export default class Character extends GameObject
 		this.fireTargetX = data.fireTargetX
 		this.fireTargetY = data.fireTargetY
 		this.health = data.health
+
+		this.weapon = new Weapon(data.weapon)
 	}
 
 	animateCharacter()
