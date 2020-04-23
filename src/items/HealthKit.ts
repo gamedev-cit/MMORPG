@@ -19,6 +19,9 @@ export default class HealthKit extends Item
     {
         if (gameObject == GameStage.instance.player) {
 			GameStage.instance.player.health += 30
+			if (GameStage.instance.player.health > GameStage.instance.player.fullHealth) {
+				GameStage.instance.player.health = GameStage.instance.player.fullHealth
+			}
 			GameStage.instance.world.removeChild(this)
 
 			GameStage.instance.socket.emit("delete_item", {
