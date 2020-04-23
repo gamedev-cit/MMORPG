@@ -37,6 +37,11 @@ export default class Bullet extends GameObject
 			GameStage.instance.player.health -= this.damage
 		}
 
-		GameStage.instance.world.removeChild(this)
+		var isMeleeWeapon = (Math.hypot(this.speedX, this.speedY) < 2)
+		if (isMeleeWeapon) {
+			this.onRemoved()
+		} else {
+			GameStage.instance.world.removeChild(this)
+		}
 	}
 }
