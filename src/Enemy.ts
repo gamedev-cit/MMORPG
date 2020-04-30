@@ -23,9 +23,14 @@ export default class Enemy extends Character
 
 		let dx = this.targetX - this.x
 		let dy = this.targetY - this.y
-		var length = Math.sqrt(dx*dx + dy*dy)
+		var distanceToTarget = Math.sqrt(dx*dx + dy*dy)
 		
-		this.speedX = dx/length * this.speed
-		this.speedY = dy/length * this.speed
+		if (distanceToTarget < 300) {
+			this.speedX = dx/distanceToTarget * this.speed
+			this.speedY = dy/distanceToTarget * this.speed
+		} else {
+			this.speedX = 0
+			this.speedY = 0
+		}
 	}
 }
