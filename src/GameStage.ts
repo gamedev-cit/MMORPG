@@ -4,22 +4,14 @@ import Stage from './Stage';
 import GameObject from './GameObject';
 import Character from './Character';
 import Player from './players/Player';
-import Knight from './players/Knight';
+import Enemy from './Enemy';
 import PlayerController from './PlayerController';
-import Dryad from './players/Dryad';
-import Dwarf from './players/Dwarf';
-import JJmans from './players/JJmans';
-import Jotun from './players/Jotun';
-import Necromancer from './players/Necromancer';
-import Bee from './players/Bee';
-import HumanSpider from './players/HumanSpider';
 import Main from './Main';
 import map1Url from './res/map_1.jpg'
 import GameObjectManager from './GameObjectManager';
 import Item from './items/Item'
 import Hospital from './buildings/Hospital';
 import Forge from './buildings/Forge';
-import Enemy from './Enemy';
 import EnemySlime from './EnemySlime';
 
 export default class GameStage extends Stage
@@ -163,8 +155,8 @@ export default class GameStage extends Stage
 		var enemies = this.getEnemies()
 		if (enemies.length < 3) {
 			var newEnemy = new EnemySlime()
-			newEnemy.x = 3000 + Math.random() * 100
-			newEnemy.y = 2700 + Math.random() * 100
+			newEnemy.x = 3000 + Math.random() * 300
+			newEnemy.y = 2700 + Math.random() * 300
 			this.socket.emit("request_character", newEnemy.data())
 		}
 	}
@@ -176,6 +168,10 @@ export default class GameStage extends Stage
 			if (enemy.owner == this.player.id) {
 				enemy.ai()
 				this.socket.emit("character", enemy.data())
+
+				if (enemy.health <= 0) {
+					this.socket.emit("delete_character", enemy.data())
+				}
 			}
 		}
 	}

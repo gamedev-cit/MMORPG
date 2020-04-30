@@ -1,7 +1,7 @@
 import GameObject from "./GameObject";
 import Character from "./Character";
-import bulletUrl from './res/bullet_1.png'
 import GameStage from "./GameStage";
+import Enemy from "./Enemy";
 
 export default class Bullet extends GameObject
 {
@@ -31,6 +31,11 @@ export default class Bullet extends GameObject
 	{
 		if (this.owner == gameObject) {
 			return
+		}
+
+		var isEnemyOwnedByPlayer = (gameObject instanceof Enemy && (gameObject as Enemy).owner == GameStage.instance.player.id);
+		if (isEnemyOwnedByPlayer) {
+			(gameObject as Enemy).health -= this.damage
 		}
 
 		if (gameObject == GameStage.instance.player) {
