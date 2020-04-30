@@ -12,7 +12,7 @@ export default class Main
 	{
 		Main.instance = this
 		
-		this.app = new PIXI.Application(1280, 700)
+		this.app = new PIXI.Application(1250, 700)
 
 		document.body.appendChild(this.app.view)
 		
