@@ -85,6 +85,7 @@ export default class Character extends GameObject
 	data(): any
 	{
 		return {
+			"id": this.id == "undefined" ? null : this.id,
 			"position": {
 				"x": this.x,
 				"y": this.y

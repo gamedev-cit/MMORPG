@@ -126,6 +126,7 @@ export default class GameStage extends Stage
 	{
 		this.collideGameObjectsWithGameObjects()
 		this.checkPlayerHealth()
+		this.controlEnemies()
 
 		this.socket.emit("character", this.player.data())
 	
@@ -164,6 +165,17 @@ export default class GameStage extends Stage
 			newEnemy.x = 3000 + Math.random() * 100
 			newEnemy.y = 2700 + Math.random() * 100
 			this.socket.emit("request_character", newEnemy.data())
+		}
+	}
+
+	controlEnemies()
+	{
+		var enemies = this.getEnemies()
+		for (var enemy of enemies) {
+			if (enemy.owner == this.player.id) {
+				enemy.ai()
+				this.socket.emit("character", enemy.data())
+			}
 		}
 	}
 }
