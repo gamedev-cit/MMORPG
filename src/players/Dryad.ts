@@ -1,5 +1,5 @@
 import Player from "./Player"
-import playerRunFrame1Url from './res/player_run_dryad_frame_1.png'
+import playerRunFrame1Url from '../res/player_run_dryad_frame_1.png'
 
 
 export default class Dryad extends Player 

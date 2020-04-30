@@ -1,8 +1,8 @@
-import playerRunFrame1Url from './res/player_run_knight_frame_1.png'
-import playerRunFrame2Url from './res/player_run_knight_frame_2.png'
+import playerRunFrame1Url from '../res/player_run_knight_frame_1.png'
+import playerRunFrame2Url from '../res/player_run_knight_frame_2.png'
 
 import Player from "./Player";
-import Weapon from './items/Weapon';
+import Weapon from '../items/Weapon';
 
 export default class Knight extends Player
 {
