@@ -6,10 +6,10 @@ import playerRunFrame4Url from './res/slime_enemy_4.png'
 
 import Enemy from "./Enemy";
 
-export default class Knight extends Enemy
+export default class EnemySlime extends Enemy
 {
 	sprite: PIXI.extras.AnimatedSprite
-	type="slime"
+	type = "slime"
 
 	constructor()
 	{
