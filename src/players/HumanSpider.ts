@@ -1,11 +1,11 @@
-import playerRunFrame1Url from './res/player_run_jotun_frame_1.png'
-import playerRunFrame2Url from './res/player_run_jotun_frame_2.png'
-import Player from "./Player"; 
+import playerRunFrame1Url from '../res/player_run_spider_frame_1.png'
+import playerRunFrame2Url from '../res/player_run_spider_frame_2.png'
+import Player from "./Player";
 
-export default class Jotun extends Player
+export default class HumanSpider extends Player
 {
 	sprite: PIXI.extras.AnimatedSprite
-	type="jotun"
+	type="spider"
 
 	constructor()
 	{
@@ -20,6 +20,6 @@ export default class Jotun extends Player
 		this.addChild(this.sprite)
 
 		this.sprite.gotoAndPlay(0)
-		this.sprite.animationSpeed = 0.05
+		this.sprite.animationSpeed = 0.2
 	}
 }

@@ -1,7 +1,7 @@
-import GameObject from "./GameObject";
-import Character from "./Character";
-import playerRunFrame1Url from './res/player_run_necromancer_frame_1.png'
-import playerRunFrame2Url from './res/player_run_necromancer_frame_2.png'
+import GameObject from "../GameObject";
+import Character from "../Character";
+import playerRunFrame1Url from '../res/player_run_necromancer_frame_1.png'
+import playerRunFrame2Url from '../res/player_run_necromancer_frame_2.png'
 
 import Player from "./Player";
 
@@ -25,5 +25,13 @@ export default class Necromancer extends Player
 
 		this.sprite.gotoAndPlay(0)
 		this.sprite.animationSpeed = 0.05
+	}
+	animateCharacter(){
+		if (this.speedX < 0) {
+			this.sprite.scale.x = -1
+		}
+		if (this.speedX > 0) {
+			this.sprite.scale.x = 1
+		}
 	}
 }

@@ -1,7 +1,7 @@
-import playerRunFrame1Url from './res/player_run_shmel_frame_1.png'
-import playerRunFrame2Url from './res/player_run_shmel_frame_2.png'
-import playerRunFrame3Url from './res/player_run_shmel_frame_3.png'
-import playerRunFrame4Url from './res/player_run_shmel_frame_4.png'
+import playerRunFrame1Url from '../res/player_run_shmel_frame_1.png'
+import playerRunFrame2Url from '../res/player_run_shmel_frame_2.png'
+import playerRunFrame3Url from '../res/player_run_shmel_frame_3.png'
+import playerRunFrame4Url from '../res/player_run_shmel_frame_4.png'
 
 import Player from "./Player";
 
