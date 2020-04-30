@@ -82,6 +82,27 @@ export default class Character extends GameObject
 		}
 	}
 
+	data(): any
+	{
+		return {
+			"position": {
+				"x": this.x,
+				"y": this.y
+			},
+			"speed": {
+				"x": this.speedX,
+				"y": this.speedY
+			},
+			"radius": this.radius,
+			"type": this.type,
+			"isFiring": this.isFiring,
+			"fireTargetX": this.fireTargetX,
+			"fireTargetY": this.fireTargetY,
+			"health": this.health,
+			"weapon": this.weapon.data()
+		}
+	}
+
 	updateWithData(data: any): void
 	{
 		this.x = data.position.x

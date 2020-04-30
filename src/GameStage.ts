@@ -123,23 +123,7 @@ export default class GameStage extends Stage
 		this.collideGameObjectsWithGameObjects()
 		this.checkPlayerHealth()
 
-		this.socket.emit("character", {
-			"position": {
-				"x": this.player.x,
-				"y": this.player.y
-			},
-			"speed": {
-				"x": this.player.speedX,
-				"y": this.player.speedY
-			},
-			"radius": this.player.radius,
-			"type": this.player.type,
-			"isFiring": this.player.isFiring,
-			"fireTargetX": this.player.fireTargetX,
-			"fireTargetY": this.player.fireTargetY,
-			"health": this.player.health,
-			"weapon": this.player.weapon.data()
-		})
+		this.socket.emit("character", this.player.data())
 	
 		this.moveCamera()
 	}
