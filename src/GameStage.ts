@@ -88,6 +88,7 @@ export default class GameStage extends Stage
 		this.player = this.gameObjectManager.newObjectWithType(this.playerType) as Player
 		this.player.x = 3000 + (Math.random()*500 - 250)
 		this.player.y = 3000 + (Math.random()*500 - 250)
+		this.player.name = window.localStorage["playerName"]
 
 		this.playerController = new PlayerController(this.player)
 		this.world.addChild(this.player)

@@ -24,6 +24,8 @@ export default class Character extends GameObject
 
 	sprite!: PIXI.extras.AnimatedSprite
 
+	nameLabel = new PIXI.Text()
+
 	onAdded()
 	{
 		super.onAdded()
@@ -31,6 +33,11 @@ export default class Character extends GameObject
 		GameStage.instance.characters.push(this)
 		
 		this.addChild(this.healthBar)
+
+		this.nameLabel.anchor.x = 0.5
+		this.nameLabel.y = -85
+		this.nameLabel.style.fontSize = 14
+		this.addChild(this.nameLabel)
 	}
 
 	onRemoved()
@@ -62,6 +69,8 @@ export default class Character extends GameObject
 		this.healthBar.endFill()
 
 		this.animateCharacter()
+
+		this.nameLabel.text = this.name || ""
 	}
 
 	fire(targetX: number, targetY: number)
@@ -102,7 +111,8 @@ export default class Character extends GameObject
 			"fireTargetX": this.fireTargetX,
 			"fireTargetY": this.fireTargetY,
 			"health": this.health,
-			"weapon": this.weapon.data()
+			"weapon": this.weapon.data(),
+			"name": this.name
 		}
 	}
 
@@ -116,6 +126,7 @@ export default class Character extends GameObject
 		this.fireTargetX = data.fireTargetX
 		this.fireTargetY = data.fireTargetY
 		this.health = data.health
+		this.name = data.name
 
 		this.weapon = new Weapon(data.weapon)
 	}

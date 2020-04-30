@@ -12,9 +12,18 @@ import playerClassSpiderImageUrl from './res/player_class_spider.png'
 
 import Main from "./Main";
 import GameStage from "./GameStage";
+import TextInput from "./TextInput";
 
 export default class MainMenuStage extends Stage
 {
+    nameTextField = new TextInput( { input: {
+		fontSize: '25pt',
+		padding: '14px',
+		width: '400px'
+	}, box: {
+		fill: 0xE8E9F3
+    }})
+    
     constructor()
     {
         super()
@@ -30,7 +39,18 @@ export default class MainMenuStage extends Stage
 		this.addButton(100, 350, playerClassKnightImageUrl, "knight")
 		this.addButton(250, 350, playerClassNecromancerImageUrl, "necromancer")
 		this.addButton(400, 350, playerClassShmelImageUrl, "shmel")
-		this.addButton(550, 350, playerClassSpiderImageUrl, "spider")
+        this.addButton(550, 350, playerClassSpiderImageUrl, "spider")
+        
+        this.addTextField()
+    }
+
+    addTextField()
+    {
+        this.nameTextField.x = 100
+		this.nameTextField.y = 50
+		var savedName = window.localStorage["playerName"]
+		this.nameTextField.text = savedName
+		this.addChild(this.nameTextField)
     }
 
     addButton(x: number, y: number, imageUrl: string, type: string)
@@ -43,7 +63,9 @@ export default class MainMenuStage extends Stage
 
         button.interactive = true
 		button.on("mouseup", (event: PIXI.interaction.InteractionEvent) => {
-			Main.instance.showStage(new GameStage(type))
+            Main.instance.showStage(new GameStage(type))
+            
+            window.localStorage["playerName"] = this.nameTextField.text
         });
     }
 }
