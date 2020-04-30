@@ -24,6 +24,9 @@ export default class GameObjectManager
 			if (objectData.id == GameStage.instance.player.id) {
 				continue;
 			}
+			if (objectData.owner == GameStage.instance.player.id) {
+				continue;
+			}
 			var character = this.getObjectWithId(objects, objectData.id)!
 			character.updateWithData(objectData)
 		}
@@ -35,6 +38,7 @@ export default class GameObjectManager
 			if (this.getObjectWithId(objects, objectData.id) == null) {
 				var newObject = this.newObjectWithType(objectData.type)
 				newObject.id = objectData.id
+				newObject.updateWithData(objectData)
 				GameStage.instance.world.addChild(newObject)
 			}
 		}

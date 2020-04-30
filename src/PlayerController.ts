@@ -25,19 +25,19 @@ export default class PlayerController
         this.player.speedY = this.player.speedY * 0.8
 
 		if (this.keyboardManager.isDown("ArrowRight") || this.keyboardManager.isDown("KeyD")) {
-			this.player.speedX = 2
+			this.player.speedX = this.player.speed
 		}
 
 		if (this.keyboardManager.isDown("ArrowLeft") || this.keyboardManager.isDown("KeyA")) {
-			this.player.speedX = -2
+			this.player.speedX = -this.player.speed
 		}
 
 		if (this.keyboardManager.isDown("ArrowUp") || this.keyboardManager.isDown("KeyW")) {
-			this.player.speedY = -2
+			this.player.speedY = -this.player.speed
 		}
 
 		if (this.keyboardManager.isDown("ArrowDown") || this.keyboardManager.isDown("KeyS")) {
-			this.player.speedY = 2
+			this.player.speedY = this.player.speed
 		}
 
 		if (this.mouseManager.mouseDown) {

@@ -11,6 +11,9 @@ export default class EnemySlime extends Enemy
 	sprite: PIXI.extras.AnimatedSprite
 	type = "slime"
 
+	speed = 2.1
+	health = 58
+
 	constructor()
 	{
 		super(40)

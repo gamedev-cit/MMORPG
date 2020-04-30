@@ -20,6 +20,8 @@ export default class Character extends GameObject
 
 	healthBar = new PIXI.Graphics()
 
+	speed = 2
+
 	sprite!: PIXI.extras.AnimatedSprite
 
 	onAdded()
