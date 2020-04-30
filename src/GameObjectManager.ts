@@ -11,6 +11,7 @@ import GameObject from "./GameObject";
 import HealthKit from "./items/HealthKit";
 import Weapon from "./items/Weapon";
 import WeaponItem from "./items/WeaponItem";
+import EnemySlime from "./EnemySlime";
 
 export default class GameObjectManager
 {
@@ -100,6 +101,10 @@ export default class GameObjectManager
 
 		if (type == "weapon") {
 			return new WeaponItem()
+		}
+
+		if (type == "slime") {
+			return new EnemySlime()
 		}
 
 		return new Knight()

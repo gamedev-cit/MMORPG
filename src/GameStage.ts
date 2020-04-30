@@ -19,6 +19,8 @@ import GameObjectManager from './GameObjectManager';
 import Item from './items/Item'
 import Hospital from './buildings/Hospital';
 import Forge from './buildings/Forge';
+import Enemy from './Enemy';
+import EnemySlime from './EnemySlime';
 
 export default class GameStage extends Stage
 {
@@ -99,6 +101,8 @@ export default class GameStage extends Stage
 		
 		this.gameObjectManager.updateObjectsWithGameState(this.characters, state.characters)
 		this.gameObjectManager.updateObjectsWithGameState(this.items, state.items)
+
+		this.createEnemiesIfNeeded()
 	}
 
 	collideGameObjectsWithGameObjects()
@@ -139,5 +143,27 @@ export default class GameStage extends Stage
 	{
 		this.world.x = -this.player.x + Main.instance.app.renderer.width*0.5
 		this.world.y = -this.player.y + Main.instance.app.renderer.height*0.5
+	}
+
+	getEnemies(): Array<Enemy>
+	{
+		var enemies = new Array<Enemy>()
+		for (var character of this.characters) {
+			if (character instanceof Enemy) {
+				enemies.push(character)
+			}
+		}
+		return enemies
+	}
+
+	createEnemiesIfNeeded()
+	{
+		var enemies = this.getEnemies()
+		if (enemies.length < 3) {
+			var newEnemy = new EnemySlime()
+			newEnemy.x = 3000 + Math.random() * 100
+			newEnemy.y = 2700 + Math.random() * 100
+			this.socket.emit("request_character", newEnemy.data())
+		}
 	}
 }

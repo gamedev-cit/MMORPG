@@ -19,7 +19,9 @@ export default class EnemySlime extends Enemy
             PIXI.Texture.from(playerRunFrame1Url),
             PIXI.Texture.from(playerRunFrame2Url),
             PIXI.Texture.from(playerRunFrame3Url),
-			PIXI.Texture.from(playerRunFrame4Url)
+			PIXI.Texture.from(playerRunFrame4Url),
+			PIXI.Texture.from(playerRunFrame3Url),
+			PIXI.Texture.from(playerRunFrame2Url)
 		])
 		this.sprite.anchor.x = 0.5
 		this.sprite.anchor.y = 0.5
