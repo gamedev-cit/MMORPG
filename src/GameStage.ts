@@ -31,7 +31,7 @@ export default class GameStage extends Stage
 	playerController!: PlayerController
 	gameObjectManager = new GameObjectManager()
 
-	debugLabel = new PIXI.Text()
+	coinsLabel = new PIXI.Text()
 
 	playerType: string
 
@@ -57,9 +57,9 @@ export default class GameStage extends Stage
 
 		this.loadMap()
 
-		this.debugLabel.style.fill = 0xffffff
-		this.debugLabel.style.fontSize = 12
-		this.addChild(this.debugLabel)
+		this.coinsLabel.style.fill = 0x000000
+		this.coinsLabel.style.fontSize = 12
+		this.addChild(this.coinsLabel)
 	}
 
 	loadMap()
@@ -130,6 +130,8 @@ export default class GameStage extends Stage
 		this.socket.emit("character", this.player.data())
 	
 		this.moveCamera()
+
+		this.coinsLabel.text = "Coins: " + this.player.coins
 	}
 
 	checkPlayerHealth()
