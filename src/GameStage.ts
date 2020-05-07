@@ -88,8 +88,6 @@ export default class GameStage extends Stage
 
 	onGameState(state: any)
 	{
-		this.debugLabel.text = JSON.stringify(state, null, "    ");
-
 		this.player.id = this.socket.id;
 		
 		this.gameObjectManager.updateObjectsWithGameState(this.characters, state.characters)
