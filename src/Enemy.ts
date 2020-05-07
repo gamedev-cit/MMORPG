@@ -19,8 +19,23 @@ export default class Enemy extends Character
 
 	ai()
 	{
-		this.targetX = GameStage.instance.player.x
-		this.targetY = GameStage.instance.player.y
+		var players = GameStage.instance.getPlayers()
+		
+		var nearestPlayer = GameStage.instance.player
+		var minimumDistance = 1000000
+		for (var player of players) {
+			let dx = player.x - this.x
+			let dy = player.y - this.y
+			var distanceToPlayer = Math.sqrt(dx*dx + dy*dy)
+
+			if (distanceToPlayer < minimumDistance) {
+				minimumDistance = distanceToPlayer
+				nearestPlayer = player
+			}
+		}
+
+		this.targetX = nearestPlayer.x
+		this.targetY = nearestPlayer.y
 
 		let dx = this.targetX - this.x
 		let dy = this.targetY - this.y

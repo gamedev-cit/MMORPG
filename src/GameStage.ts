@@ -139,12 +139,23 @@ export default class GameStage extends Stage
 		this.world.y = -this.player.y + Main.instance.app.renderer.height*0.5
 	}
 
+	getPlayers(): Array<Player>
+	{
+		var players = new Array<Player>()
+		for (var character of this.characters) {
+			if (character.class == "player") {
+				players.push(character as Player)
+			}
+		}
+		return players
+	}
+
 	getEnemies(): Array<Enemy>
 	{
 		var enemies = new Array<Enemy>()
 		for (var character of this.characters) {
-			if (character instanceof Enemy) {
-				enemies.push(character)
+			if (character.class == "enemy") {
+				enemies.push(character as Enemy)
 			}
 		}
 		return enemies
