@@ -6,6 +6,7 @@ import Weapon from "./items/Weapon";
 export default class Character extends GameObject
 {
 	type = "unknown"
+	class = 'character'
 
 	weapon: Weapon = Weapon.magicBalls
 

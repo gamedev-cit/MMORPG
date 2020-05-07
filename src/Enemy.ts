@@ -5,6 +5,7 @@ import GameStage from "./GameStage";
 export default class Enemy extends Character
 {
 	owner = "noone"
+	class = 'enemy'
 	
 	targetX = 0
 	targetY = 0
