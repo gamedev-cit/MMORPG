@@ -43,12 +43,9 @@ export default class Enemy extends Character
 		let dy = this.targetY - this.y
 		var distanceToTarget = Math.sqrt(dx*dx + dy*dy)
 		
-		if (distanceToTarget < 300) {
-			this.speedX = dx/distanceToTarget * this.speed
-			this.speedY = dy/distanceToTarget * this.speed
-		} else {
-			this.speedX = 0
-			this.speedY = 0
+		this.speedX = dx/distanceToTarget * this.speed
+		this.speedY = dy/distanceToTarget * this.speed
+	}
 
 	didHitGameObject(gameObject: GameObject)
 	{
