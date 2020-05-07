@@ -12,6 +12,7 @@ import HealthKit from "./items/HealthKit";
 import Weapon from "./items/Weapon";
 import WeaponItem from "./items/WeaponItem";
 import EnemySlime from "./EnemySlime";
+import Coin from "./items/Coin";
 
 export default class GameObjectManager
 {
@@ -106,6 +107,11 @@ export default class GameObjectManager
 		if (type == "weapon") {
 			return new WeaponItem()
 		}
+
+		if (type == "coin") {
+			return new Coin()
+		}
+
 
 		if (type == "slime") {
 			return new EnemySlime()
