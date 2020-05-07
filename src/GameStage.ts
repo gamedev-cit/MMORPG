@@ -24,6 +24,7 @@ export default class GameStage extends Stage
 	gameObjects = new Array<GameObject>()
 	characters = new Array<Character>()
 	items = new Array<Item>()
+	timeSinceLastEnemyKilled = 0
 
 	player!: Player
 	playerController!: PlayerController
@@ -92,6 +93,7 @@ export default class GameStage extends Stage
 		
 		this.gameObjectManager.updateObjectsWithGameState(this.characters, state.characters)
 		this.gameObjectManager.updateObjectsWithGameState(this.items, state.items)
+		this.timeSinceLastEnemyKilled = state.timeSinceLastEnemyKilled
 
 		this.createEnemiesIfNeeded()
 	}
@@ -162,10 +164,13 @@ export default class GameStage extends Stage
 	createEnemiesIfNeeded()
 	{
 		var enemies = this.getEnemies()
-		if (enemies.length < 3) {
+		if (enemies.length < 100
+			 && this.timeSinceLastEnemyKilled > 20 * 1000
+			 && this.timeSinceLastEnemyKilled < 40 * 1000)
+		{
 			var newEnemy = new EnemySlime()
-			newEnemy.x = 3000 + Math.random() * 300
-			newEnemy.y = 2700 + Math.random() * 300
+			newEnemy.x = 3000 + Math.random() * 400
+			newEnemy.y = 2000 + Math.random() * 400
 			this.socket.emit("request_character", newEnemy.data())
 		}
 	}
