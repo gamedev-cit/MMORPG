@@ -137,7 +137,24 @@ export default class GameStage extends Stage
 	checkPlayerHealth()
 	{
 		if (this.player.health <= 0) {
+			this.dropCoins()
 			this.respawn()
+		}
+	}
+
+	dropCoins()
+	{
+		for (var i=0; i<this.player.coins/2; i++) {
+			var angle = Math.random() * Math.PI*2
+			
+			GameStage.instance.socket.emit("item", {
+				"id": "item_" + Math.random(),
+				"type": "coin",
+				"position": {
+					"x": this.player.x + (30 + Math.random() * 110) * Math.cos(angle),
+					"y": this.player.y + (30 + Math.random() * 110) * Math.sin(angle)
+				}
+			})
 		}
 	}
 
