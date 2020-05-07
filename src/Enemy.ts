@@ -10,6 +10,8 @@ export default class Enemy extends Character
 	targetX = 0
 	targetY = 0
 
+	collisionDamage = 0.5
+
 	updateWithData(data: any): void
 	{
 		super.updateWithData(data)
@@ -47,6 +49,11 @@ export default class Enemy extends Character
 		} else {
 			this.speedX = 0
 			this.speedY = 0
+
+	didHitGameObject(gameObject: GameObject)
+	{
+		if (gameObject == GameStage.instance.player) {
+			GameStage.instance.player.health -= this.collisionDamage
 		}
 	}
 }
