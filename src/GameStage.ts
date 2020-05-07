@@ -13,6 +13,7 @@ import Item from './items/Item'
 import Hospital from './buildings/Hospital';
 import Forge from './buildings/Forge';
 import EnemySlime from './EnemySlime';
+import Mine from './buildings/Mine';
 
 export default class GameStage extends Stage
 {
@@ -72,6 +73,11 @@ export default class GameStage extends Stage
 		forge.x = 2700
 		forge.y = 3000
 		this.world.addChild(forge)
+
+		var mine = new Mine()
+		mine.x = 3000
+		mine.y = 3500
+		this.world.addChild(mine)
 	}
 
 	respawn()
