@@ -1,10 +1,12 @@
 import GameObject from "../GameObject";
 import GameStage from "../GameStage";
 import imageUrl from '../res/building_1.png'
+import Building from "./Building";
 
-export default class Hospital extends GameObject
+export default class Hospital extends Building
 {
 	buildProgress = 0
+	type = "hospital"
 
 	constructor()
 	{

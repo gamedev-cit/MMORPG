@@ -14,6 +14,7 @@ import Hospital from './buildings/Hospital';
 import Forge from './buildings/Forge';
 import EnemySlime from './EnemySlime';
 import Mine from './buildings/Mine';
+import Building from './buildings/Building';
 
 export default class GameStage extends Stage
 {
@@ -67,12 +68,14 @@ export default class GameStage extends Stage
 		var hospital = new Hospital()
 		hospital.x = 3200
 		hospital.y = 3000
-		this.world.addChild(hospital)
+		hospital.id = "hospital"
+		this.socket.emit("character", hospital.data())
 
 		var forge = new Forge()
 		forge.x = 2700
 		forge.y = 3000
-		this.world.addChild(forge)
+		forge.id = "forge"
+		this.socket.emit("character", forge.data())
 
 		var mine = new Mine()
 		mine.x = 3000

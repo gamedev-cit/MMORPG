@@ -33,7 +33,7 @@ export default class Bullet extends GameObject
 			return
 		}
 
-		var isEnemyOwnedByPlayer = (gameObject.class == "enemy" && (gameObject as Enemy).owner == GameStage.instance.player.id);
+		var isEnemyOwnedByPlayer = ((gameObject.class == "building" || gameObject.class == "enemy") && (gameObject as Enemy).owner == GameStage.instance.player.id);
 		if (isEnemyOwnedByPlayer) {
 			(gameObject as Enemy).health -= this.damage
 		}

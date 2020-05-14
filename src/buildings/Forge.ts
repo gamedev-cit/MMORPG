@@ -2,10 +2,12 @@ import GameObject from "../GameObject";
 import GameStage from "../GameStage";
 import imageUrl from '../res/building_2.png'
 import Weapon from "../items/Weapon";
+import Building from "./Building";
 
-export default class Forge extends GameObject
+export default class Forge extends Building
 {
 	buildProgress = 0
+	type = "forge"
 
 	constructor()
 	{
