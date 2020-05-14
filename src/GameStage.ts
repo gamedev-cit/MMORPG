@@ -14,6 +14,7 @@ import Hospital from './buildings/Hospital';
 import Forge from './buildings/Forge';
 import EnemySlime from './EnemySlime';
 import Mine from './buildings/Mine';
+import Building from './buildings/Building';
 
 export default class GameStage extends Stage
 {
@@ -67,12 +68,14 @@ export default class GameStage extends Stage
 		var hospital = new Hospital()
 		hospital.x = 3200
 		hospital.y = 3000
-		this.world.addChild(hospital)
+		hospital.id = "hospital"
+		this.socket.emit("character", hospital.data())
 
 		var forge = new Forge()
 		forge.x = 2700
 		forge.y = 3000
-		this.world.addChild(forge)
+		forge.id = "forge"
+		this.socket.emit("character", forge.data())
 
 		var mine = new Mine()
 		mine.x = 3000
@@ -126,6 +129,7 @@ export default class GameStage extends Stage
 		this.collideGameObjectsWithGameObjects()
 		this.checkPlayerHealth()
 		this.controlEnemies()
+		this.controlBuildings()
 
 		this.socket.emit("character", this.player.data())
 	
@@ -186,13 +190,30 @@ export default class GameStage extends Stage
 		return enemies
 	}
 
+	getBuildings(): Array<Building>
+	{
+		var buildings = new Array<Building>()
+		for (var character of this.characters) {
+			if (character.class == "building") {
+				buildings.push(character as Building)
+			}
+		}
+		return buildings
+	}
+
 	createEnemiesIfNeeded()
 	{
 		var enemies = this.getEnemies()
-		if (enemies.length < 100
-			 && this.timeSinceLastEnemyKilled > 20 * 1000
-			 && this.timeSinceLastEnemyKilled < 40 * 1000)
-		{
+		var shouldCreateEnemies = (enemies.length < 100)
+		if (this.timeSinceLastEnemyKilled < 20 * 1000 ||
+			this.timeSinceLastEnemyKilled > 40 * 1000) {
+			shouldCreateEnemies = false
+		}
+		if (this.timeSinceLastEnemyKilled > 40 * 1000 && enemies.length == 0) {
+			shouldCreateEnemies = true
+		}
+		
+		if (shouldCreateEnemies) {
 			var newEnemy = new EnemySlime()
 			newEnemy.x = 3000 + Math.random() * 400
 			newEnemy.y = 2000 + Math.random() * 400
@@ -210,6 +231,21 @@ export default class GameStage extends Stage
 
 				if (enemy.health <= 0) {
 					this.socket.emit("delete_character", enemy.data())
+				}
+			}
+		}
+	}
+
+	controlBuildings()
+	{
+		var buildings = this.getBuildings()
+		for (var building of buildings) {
+			if (building.owner == this.player.id) {
+				building.ai()
+				this.socket.emit("character", building.data())
+
+				if (building.health <= 0) {
+					this.socket.emit("delete_character", building.data())
 				}
 			}
 		}

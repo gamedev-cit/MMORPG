@@ -13,6 +13,8 @@ import Weapon from "./items/Weapon";
 import WeaponItem from "./items/WeaponItem";
 import EnemySlime from "./EnemySlime";
 import Coin from "./items/Coin";
+import Forge from "./buildings/Forge";
+import Hospital from "./buildings/Hospital";
 
 export default class GameObjectManager
 {
@@ -115,6 +117,15 @@ export default class GameObjectManager
 
 		if (type == "slime") {
 			return new EnemySlime()
+		}
+
+
+		if (type == "forge") {
+			return new Forge()
+		}
+
+		if (type == "hospital") {
+			return new Hospital()
 		}
 
 		return new Knight()

@@ -134,10 +134,12 @@ export default class Character extends GameObject
 
 	animateCharacter()
 	{
-		if (Math.abs(this.speedX) < 0.4 && Math.abs(this.speedY) < 0.4) {
-			this.sprite.stop()
-		} else if (!this.sprite.playing) {
-			this.sprite.gotoAndPlay(0)
+		if (this.sprite instanceof PIXI.extras.AnimatedSprite) {
+			if (Math.abs(this.speedX) < 0.4 && Math.abs(this.speedY) < 0.4) {
+				this.sprite.stop()
+			} else if (!this.sprite.playing) {
+				this.sprite.gotoAndPlay(0)
+			}
 		}
 
 		if (this.speedX < 0) {
