@@ -13,14 +13,15 @@ export default class Coin extends Item
 	}
 
 	didHitGameObject(gameObject: GameObject)
-    {
-        if (gameObject == GameStage.instance.player) {
-
-			GameStage.instance.player.coins += 1
-
+	{
+		if (gameObject == GameStage.instance.player) {
 			GameStage.instance.world.removeChild(this)
 			GameStage.instance.socket.emit("delete_item", {
 				"id": this.id
+			}, (isDeleted: Boolean) => {
+				if (isDeleted) {
+					GameStage.instance.player.coins += 1
+				}
 			})
 		}
     }
