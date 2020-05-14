@@ -16,4 +16,9 @@ export default class Building extends Character
 
 		this.owner = data.owner
 	}
+
+	ai()
+	{
+		
+	}
 }

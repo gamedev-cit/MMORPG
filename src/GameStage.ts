@@ -129,6 +129,7 @@ export default class GameStage extends Stage
 		this.collideGameObjectsWithGameObjects()
 		this.checkPlayerHealth()
 		this.controlEnemies()
+		this.controlBuildings()
 
 		this.socket.emit("character", this.player.data())
 	
@@ -189,6 +190,17 @@ export default class GameStage extends Stage
 		return enemies
 	}
 
+	getBuildings(): Array<Building>
+	{
+		var buildings = new Array<Building>()
+		for (var character of this.characters) {
+			if (character.class == "building") {
+				buildings.push(character as Building)
+			}
+		}
+		return buildings
+	}
+
 	createEnemiesIfNeeded()
 	{
 		var enemies = this.getEnemies()
@@ -219,6 +231,21 @@ export default class GameStage extends Stage
 
 				if (enemy.health <= 0) {
 					this.socket.emit("delete_character", enemy.data())
+				}
+			}
+		}
+	}
+
+	controlBuildings()
+	{
+		var buildings = this.getBuildings()
+		for (var building of buildings) {
+			if (building.owner == this.player.id) {
+				building.ai()
+				this.socket.emit("character", building.data())
+
+				if (building.health <= 0) {
+					this.socket.emit("delete_character", building.data())
 				}
 			}
 		}
