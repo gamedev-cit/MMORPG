@@ -15,6 +15,7 @@ import Forge from './buildings/Forge';
 import EnemySlime from './EnemySlime';
 import Mine from './buildings/Mine';
 import Building from './buildings/Building';
+import Tower from './buildings/Tower';
 
 export default class GameStage extends Stage
 {
@@ -81,6 +82,12 @@ export default class GameStage extends Stage
 		mine.x = 3000
 		mine.y = 3500
 		this.world.addChild(mine)
+
+		var tower = new Tower()
+		tower.x = 2900
+		tower.y = 2700
+		tower.id = "tower"
+		this.socket.emit("character", tower.data())
 	}
 
 	respawn()

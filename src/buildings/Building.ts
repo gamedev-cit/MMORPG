@@ -1,4 +1,5 @@
 import Character from "../Character";
+import GameStage from "../GameStage";
 
 export default class Building extends Character
 {

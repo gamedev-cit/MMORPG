@@ -57,4 +57,14 @@ export default class Weapon
 		bulletImageUrl: swordBulletUrl,
 		itemImageUrl: swordItemUrl
 	})
+
+	static towerMagicBalls = new Weapon({
+		fireRate: 800,
+		bulletSpeed: 6,
+		bulletLifetime: 500,
+		damage: 15,
+		bulletRadius: 10,
+		bulletImageUrl: magicBallsBulletUrl,
+		itemImageUrl: magicBallsItemUrl
+	})
 }

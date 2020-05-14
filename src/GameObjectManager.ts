@@ -15,6 +15,7 @@ import EnemySlime from "./EnemySlime";
 import Coin from "./items/Coin";
 import Forge from "./buildings/Forge";
 import Hospital from "./buildings/Hospital";
+import Tower from "./buildings/Tower";
 
 export default class GameObjectManager
 {
@@ -126,6 +127,10 @@ export default class GameObjectManager
 
 		if (type == "hospital") {
 			return new Hospital()
+		}
+
+		if (type == "tower") {
+			return new Tower()
 		}
 
 		return new Knight()
