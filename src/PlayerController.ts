@@ -3,16 +3,18 @@ import GameStage from "./GameStage";
 import KeyboardManager from "./KeyboardManager";
 import MouseManager from "./MouseManager";
 import Main from "./Main";
+import Tower from "./buildings/Tower";
+import Player from "./players/Player";
 
 export default class PlayerController
 {
-	player: Character
+	player: Player
 	
 
 	keyboardManager = new KeyboardManager()
 	mouseManager = new MouseManager(GameStage.instance)
 
-	constructor(player: Character)
+	constructor(player: Player)
 	{
 		this.player = player
 
@@ -46,6 +48,18 @@ export default class PlayerController
 			this.player.fireTargetY = this.mouseManager.mouseY - GameStage.instance.world.y;
 		} else {
 			this.player.isFiring = false
+		}
+
+		if (this.keyboardManager.isDown("KeyT")) {
+			if (this.player.coins >= 10) {
+				var tower = new Tower()
+				tower.x = this.player.x
+				tower.y = this.player.y
+				tower.id = "tower_" + Math.random()
+				GameStage.instance.socket.emit("character", tower.data())
+
+				this.player.coins -= 10
+			}
 		}
 	}
 }
