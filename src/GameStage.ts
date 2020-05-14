@@ -192,10 +192,16 @@ export default class GameStage extends Stage
 	createEnemiesIfNeeded()
 	{
 		var enemies = this.getEnemies()
-		if (enemies.length < 100
-			 && this.timeSinceLastEnemyKilled > 20 * 1000
-			 && this.timeSinceLastEnemyKilled < 40 * 1000)
-		{
+		var shouldCreateEnemies = (enemies.length < 100)
+		if (this.timeSinceLastEnemyKilled < 20 * 1000 ||
+			this.timeSinceLastEnemyKilled > 40 * 1000) {
+			shouldCreateEnemies = false
+		}
+		if (this.timeSinceLastEnemyKilled > 40 * 1000 && enemies.length == 0) {
+			shouldCreateEnemies = true
+		}
+		
+		if (shouldCreateEnemies) {
 			var newEnemy = new EnemySlime()
 			newEnemy.x = 3000 + Math.random() * 400
 			newEnemy.y = 2000 + Math.random() * 400
