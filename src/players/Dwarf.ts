@@ -20,6 +20,6 @@ export default class Dwarf extends Player
 		this.sprite.anchor.y = 0.5
 		this.addChild(this.sprite)
 
-		this.sprite.animationSpeed = 1
+		this.sprite.animationSpeed = 0.1
 	}
 }
