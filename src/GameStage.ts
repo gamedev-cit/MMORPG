@@ -67,34 +67,76 @@ export default class GameStage extends Stage
 
 	loadMap()
 	{
-		var hospital = new Hospital()
-		hospital.x = 3200
-		hospital.y = 3000
-		hospital.id = "hospital"
-		this.socket.emit("character", hospital.data())
+		if (this.player.team == "A") {
+			var centerX = 2100
+			var centerY = 3800
 
-		var forge = new Forge()
-		forge.x = 2700
-		forge.y = 3000
-		forge.id = "forge"
-		this.socket.emit("character", forge.data())
+			var hospital = new Hospital()
+			hospital.x = centerX + 200
+			hospital.y = centerY + 200
+			hospital.team = this.player.team
+			hospital.id = "hospital" + this.player.team
+			this.socket.emit("character", hospital.data())
 
+			var forge = new Forge()
+			forge.x = centerX - 400
+			forge.y = centerY
+			forge.team = this.player.team
+			forge.id = "forge" + this.player.team
+			this.socket.emit("character", forge.data())
+
+			var mainBuilding = new MainBuilding()
+			mainBuilding.x = centerX - 100
+			mainBuilding.y = centerY + 100
+			mainBuilding.team = this.player.team
+			mainBuilding.id = "main" + this.player.team
+			this.socket.emit("character", mainBuilding.data())
+
+			var tower = new Tower()
+			tower.x = centerX + 100
+			tower.y = centerY - 100
+			tower.team = this.player.team
+			tower.id = "tower" + this.player.team
+			this.socket.emit("character", tower.data())
+		}
+
+		if (this.player.team == "B") {
+			var centerX = 3900
+			var centerY = 1900
+
+			var hospital = new Hospital()
+			hospital.x = centerX - 200
+			hospital.y = centerY - 200
+			hospital.team = this.player.team
+			hospital.id = "hospital" + this.player.team
+			this.socket.emit("character", hospital.data())
+
+			var forge = new Forge()
+			forge.x = centerX + 400
+			forge.y = centerY
+			forge.team = this.player.team
+			forge.id = "forge" + this.player.team
+			this.socket.emit("character", forge.data())
+
+			var mainBuilding = new MainBuilding()
+			mainBuilding.x = centerX + 100
+			mainBuilding.y = centerY - 100
+			mainBuilding.team = this.player.team
+			mainBuilding.id = "main" + this.player.team
+			this.socket.emit("character", mainBuilding.data())
+
+			var tower = new Tower()
+			tower.x = centerX - 100
+			tower.y = centerY + 100
+			tower.team = this.player.team
+			tower.id = "tower" + this.player.team
+			this.socket.emit("character", tower.data())
+		}
+		
 		var mine = new Mine()
-		mine.x = 2700
-		mine.y = 3500
-		this.world.addChild(mine)
-
-		var tower = new Tower()
-		tower.x = 2900
-		tower.y = 2700
-		tower.id = "tower"
-		this.socket.emit("character", tower.data())
-
-		var mainBuilding = new MainBuilding()
-		mainBuilding.x = 3200
-		mainBuilding.y = 3400
-		mainBuilding.id = "main"
-		this.socket.emit("character", mainBuilding.data())
+		mine.x = 4200
+		mine.y = 4500
+		this.world.addChild(mine)		
 	}
 
 	respawn()
@@ -102,10 +144,17 @@ export default class GameStage extends Stage
 		this.world.removeChild(this.player)
 
 		this.player = this.gameObjectManager.newObjectWithType(this.playerType) as Player
-		this.player.x = 3000 + (Math.random()*500 - 250)
-		this.player.y = 3000 + (Math.random()*500 - 250)
-		this.player.name = window.localStorage["playerName"]
 		this.player.team = window.localStorage["team"]
+		this.player.name = window.localStorage["playerName"]
+
+		if (this.player.team == "A") {
+			this.player.x = 2100 + (Math.random()*500 - 250)
+			this.player.y = 3800 + (Math.random()*500 - 250)
+		}
+		if (this.player.team == "B") {
+			this.player.x = 3900 + (Math.random()*500 - 250)
+			this.player.y = 1900 + (Math.random()*500 - 250)
+		}
 
 		this.playerController = new PlayerController(this.player)
 		this.world.addChild(this.player)
@@ -236,8 +285,8 @@ export default class GameStage extends Stage
 		
 		if (shouldCreateEnemies) {
 			var newEnemy = new EnemySlime()
-			newEnemy.x = 3000 + Math.random() * 400
-			newEnemy.y = 2000 + Math.random() * 400
+			newEnemy.x = 3000 + Math.random() * 2400
+			newEnemy.y = 3000 + Math.random() * 2400
 			this.socket.emit("request_character", newEnemy.data())
 		}
 	}
