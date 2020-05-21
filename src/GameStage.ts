@@ -119,6 +119,8 @@ export default class GameStage extends Stage
 		this.timeSinceLastEnemyKilled = state.timeSinceLastEnemyKilled
 
 		this.createEnemiesIfNeeded()
+
+		this.networkUpdate()
 	}
 
 	collideGameObjectsWithGameObjects()
@@ -142,14 +144,18 @@ export default class GameStage extends Stage
 	{
 		this.collideGameObjectsWithGameObjects()
 		this.checkPlayerHealth()
-		this.controlEnemies()
-		this.controlBuildings()
-
-		this.socket.emit("character", this.player.data())
 	
 		this.moveCamera()
 
 		this.coinsLabel.text = "Coins: " + this.player.coins
+	}
+
+	networkUpdate()
+	{
+		this.controlEnemies()
+		this.controlBuildings()
+
+		this.socket.emit("character", this.player.data())
 	}
 
 	checkPlayerHealth()
