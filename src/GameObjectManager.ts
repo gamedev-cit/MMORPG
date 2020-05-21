@@ -16,6 +16,7 @@ import Coin from "./items/Coin";
 import Forge from "./buildings/Forge";
 import Hospital from "./buildings/Hospital";
 import Tower from "./buildings/Tower";
+import Enemy from "./Enemy";
 
 export default class GameObjectManager
 {
@@ -28,11 +29,16 @@ export default class GameObjectManager
 			if (objectData.id == GameStage.instance.player.id) {
 				continue;
 			}
-			if (objectData.owner == GameStage.instance.player.id) {
-				continue;
-			}
+
 			var character = this.getObjectWithId(objects, objectData.id)!
-			character.updateWithData(objectData)
+
+			if (objectData.owner == GameStage.instance.player.id) {
+				character.updateWithData(objectData)
+			} else {
+				if (character.class == "enemy" || character.class == "building") {
+					(character as Enemy).owner = objectData.owner
+				}
+			}
 		}
 	}
 

@@ -4,6 +4,7 @@ import GameStage from "../GameStage";
 export default class Item extends GameObject
 {
 	type = "undefined"
+	class = 'item'
 
 	onAdded()
 	{
