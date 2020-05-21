@@ -2,6 +2,7 @@ import Building from "./Building"
 import imageUrl from "../res/tower_1.png"
 import GameStage from "../GameStage"
 import Weapon from '../items/Weapon';
+import Character from "../Character";
 
 export default class Tower extends Building
 {
@@ -21,7 +22,12 @@ export default class Tower extends Building
 
 	ai()
 	{
-		var enemies = GameStage.instance.getEnemies()
+		var enemies = new Array<Character>()
+		for (var character of GameStage.instance.characters) {
+			if (character.team != GameStage.instance.player.team) {
+				enemies.push(character)
+			}
+		}
 
 		if (enemies.length == 0) {
 			return
