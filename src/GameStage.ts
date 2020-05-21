@@ -68,8 +68,8 @@ export default class GameStage extends Stage
 	loadMap()
 	{
 		if (this.player.team == "A") {
-			var centerX = 2100
-			var centerY = 3800
+			var centerX = 2400
+			var centerY = 3500
 
 			var hospital = new Hospital()
 			hospital.x = centerX + 200
@@ -101,8 +101,8 @@ export default class GameStage extends Stage
 		}
 
 		if (this.player.team == "B") {
-			var centerX = 3900
-			var centerY = 1900
+			var centerX = 3700
+			var centerY = 2400
 
 			var hospital = new Hospital()
 			hospital.x = centerX - 200
@@ -148,12 +148,12 @@ export default class GameStage extends Stage
 		this.player.name = window.localStorage["playerName"]
 
 		if (this.player.team == "A") {
-			this.player.x = 2100 + (Math.random()*500 - 250)
-			this.player.y = 3800 + (Math.random()*500 - 250)
+			this.player.x = 2400 + (Math.random()*500 - 250)
+			this.player.y = 3500 + (Math.random()*500 - 250)
 		}
 		if (this.player.team == "B") {
-			this.player.x = 3900 + (Math.random()*500 - 250)
-			this.player.y = 1900 + (Math.random()*500 - 250)
+			this.player.x = 3700 + (Math.random()*500 - 250)
+			this.player.y = 2400 + (Math.random()*500 - 250)
 		}
 
 		this.playerController = new PlayerController(this.player)
