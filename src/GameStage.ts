@@ -16,6 +16,7 @@ import EnemySlime from './EnemySlime';
 import Mine from './buildings/Mine';
 import Building from './buildings/Building';
 import Tower from './buildings/Tower';
+import MainBuilding from './buildings/MainBuilding';
 
 export default class GameStage extends Stage
 {
@@ -79,7 +80,7 @@ export default class GameStage extends Stage
 		this.socket.emit("character", forge.data())
 
 		var mine = new Mine()
-		mine.x = 3000
+		mine.x = 2700
 		mine.y = 3500
 		this.world.addChild(mine)
 
@@ -88,6 +89,12 @@ export default class GameStage extends Stage
 		tower.y = 2700
 		tower.id = "tower"
 		this.socket.emit("character", tower.data())
+
+		var mainBuilding = new MainBuilding()
+		mainBuilding.x = 3200
+		mainBuilding.y = 3400
+		mainBuilding.id = "main"
+		this.socket.emit("character", mainBuilding.data())
 	}
 
 	respawn()
@@ -112,6 +119,8 @@ export default class GameStage extends Stage
 		this.timeSinceLastEnemyKilled = state.timeSinceLastEnemyKilled
 
 		this.createEnemiesIfNeeded()
+
+		this.networkUpdate()
 	}
 
 	collideGameObjectsWithGameObjects()
@@ -135,14 +144,18 @@ export default class GameStage extends Stage
 	{
 		this.collideGameObjectsWithGameObjects()
 		this.checkPlayerHealth()
-		this.controlEnemies()
-		this.controlBuildings()
-
-		this.socket.emit("character", this.player.data())
 	
 		this.moveCamera()
 
 		this.coinsLabel.text = "Coins: " + this.player.coins
+	}
+
+	networkUpdate()
+	{
+		this.controlEnemies()
+		this.controlBuildings()
+
+		this.socket.emit("character", this.player.data())
 	}
 
 	checkPlayerHealth()

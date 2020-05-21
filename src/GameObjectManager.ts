@@ -17,6 +17,7 @@ import Forge from "./buildings/Forge";
 import Hospital from "./buildings/Hospital";
 import Tower from "./buildings/Tower";
 import Enemy from "./Enemy";
+import MainBuilding from "./buildings/MainBuilding";
 
 export default class GameObjectManager
 {
@@ -137,6 +138,10 @@ export default class GameObjectManager
 
 		if (type == "tower") {
 			return new Tower()
+		}
+
+		if (type == "main") {
+			return new MainBuilding()
 		}
 
 		return new Knight()
