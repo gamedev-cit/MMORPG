@@ -1,6 +1,6 @@
 import GameObject from "../GameObject";
 import GameStage from "../GameStage";
-import imageUrl from '../res/building_2.png'
+import imageUrl from '../res/building_3.png'
 import Weapon from "../items/Weapon";
 import Building from "./Building";
 
