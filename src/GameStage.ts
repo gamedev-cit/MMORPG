@@ -68,8 +68,8 @@ export default class GameStage extends Stage
 	loadMap()
 	{
 		if (this.player.team == "A") {
-			var centerX = 2400
-			var centerY = 3500
+			var centerX = 2300
+			var centerY = 3600
 
 			var hospital = new Hospital()
 			hospital.x = centerX + 200
@@ -93,16 +93,16 @@ export default class GameStage extends Stage
 			this.socket.emit("character", mainBuilding.data())
 
 			var tower = new Tower()
-			tower.x = centerX + 100
-			tower.y = centerY - 100
+			tower.x = centerX + 200
+			tower.y = centerY - 200
 			tower.team = this.player.team
 			tower.id = "tower" + this.player.team
 			this.socket.emit("character", tower.data())
 		}
 
 		if (this.player.team == "B") {
-			var centerX = 3700
-			var centerY = 2400
+			var centerX = 3600
+			var centerY = 2300
 
 			var hospital = new Hospital()
 			hospital.x = centerX - 200
@@ -126,16 +126,16 @@ export default class GameStage extends Stage
 			this.socket.emit("character", mainBuilding.data())
 
 			var tower = new Tower()
-			tower.x = centerX - 100
-			tower.y = centerY + 100
+			tower.x = centerX - 200
+			tower.y = centerY + 200
 			tower.team = this.player.team
 			tower.id = "tower" + this.player.team
 			this.socket.emit("character", tower.data())
 		}
 		
 		var mine = new Mine()
-		mine.x = 4200
-		mine.y = 4500
+		mine.x = 4000
+		mine.y = 4000
 		this.world.addChild(mine)		
 	}
 
