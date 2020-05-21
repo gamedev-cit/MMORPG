@@ -65,7 +65,14 @@ export default class Character extends GameObject
 		if (healthBarWidth < 1) {
 			healthBarWidth = 1
 		}
-		this.healthBar.beginFill(0xcf7070)
+
+		if (this.team == "A") {
+			this.healthBar.beginFill(0xc84a4a)
+		} else if (this.team == "B") {
+			this.healthBar.beginFill(0x4a5bc8)
+		} else {
+			this.healthBar.beginFill(0xc0c0c0)
+		}
 		this.healthBar.drawRect(-35, -60, healthBarWidth, 8)
 		this.healthBar.endFill()
 
@@ -113,7 +120,8 @@ export default class Character extends GameObject
 			"fireTargetY": this.fireTargetY,
 			"health": this.health,
 			"weapon": this.weapon.data(),
-			"name": this.name
+			"name": this.name,
+			"team": this.team
 		}
 	}
 
@@ -128,6 +136,7 @@ export default class Character extends GameObject
 		this.fireTargetY = data.fireTargetY
 		this.health = data.health
 		this.name = data.name
+		this.team = data.team
 
 		this.weapon = new Weapon(data.weapon)
 	}

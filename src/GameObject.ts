@@ -5,6 +5,7 @@ export default class GameObject extends PIXI.Sprite
 {
     id = 'undefined'
     class = 'gameobject'
+    team = "X"
     
 	speedX: number = 0
 	speedY: number = 0

@@ -1,6 +1,7 @@
 import * as PIXI from 'pixi.js'
 import MainMenuStage from './MainMenuStage'
 import Stage from './Stage'
+import SelectTeamStage from './SelectTeamStage'
 
 export default class Main
 {
@@ -16,7 +17,7 @@ export default class Main
 
 		document.body.appendChild(this.app.view)
 		
-		var mainMenuStage = new MainMenuStage()
+		var mainMenuStage = new SelectTeamStage()
 		this.showStage(mainMenuStage)
 	}
 
