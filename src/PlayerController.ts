@@ -56,6 +56,7 @@ export default class PlayerController
 				tower.x = this.player.x
 				tower.y = this.player.y
 				tower.id = "tower_" + Math.random()
+				tower.team = this.player.team
 				GameStage.instance.socket.emit("character", tower.data())
 
 				this.player.coins -= 10
