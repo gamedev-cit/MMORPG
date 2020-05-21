@@ -33,11 +33,11 @@ export default class GameObjectManager
 			var character = this.getObjectWithId(objects, objectData.id)!
 
 			if (objectData.owner == GameStage.instance.player.id) {
-				character.updateWithData(objectData)
-			} else {
 				if (character.class == "enemy" || character.class == "building") {
 					(character as Enemy).owner = objectData.owner
 				}
+			} else {
+				character.updateWithData(objectData)
 			}
 		}
 	}
