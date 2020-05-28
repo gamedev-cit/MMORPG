@@ -17,6 +17,8 @@ import Mine from './buildings/Mine';
 import Building from './buildings/Building';
 import Tower from './buildings/Tower';
 import MainBuilding from './buildings/MainBuilding';
+import GameOverStage from './GameOver';
+import VictoryStage from './VictoryStage';
 
 export default class GameStage extends Stage
 {
@@ -65,6 +67,11 @@ export default class GameStage extends Stage
 		this.coinsLabel.style.fill = 0x000000
 		this.coinsLabel.style.fontSize = 12
 		this.addChild(this.coinsLabel)
+	}
+
+	onRemoved()
+	{
+		this.socket.disconnect()
 	}
 
 	loadMap()
@@ -185,6 +192,8 @@ export default class GameStage extends Stage
 		if (this.getMainBuilding(this.player.team) == null && this.gameTime() < 5000) {
 			this.createCommonBuildings()
 		}
+
+		this.checkGameEnd()
 	}
 
 	collideGameObjectsWithGameObjects()
@@ -342,6 +351,19 @@ export default class GameStage extends Stage
 					this.socket.emit("delete_character", building.data())
 				}
 			}
+		}
+	}
+
+	checkGameEnd()
+	{
+		var playerTeamMainBuilding = this.getMainBuilding(this.player.team)
+		var enemyMainBuilding = this.getMainBuilding(this.player.team == "A" ? "B" : "A")
+
+		if (playerTeamMainBuilding == null) {
+			Main.instance.showStage(new GameOverStage())
+		}
+		if (enemyMainBuilding == null) {
+			Main.instance.showStage(new VictoryStage())
 		}
 	}
 }
