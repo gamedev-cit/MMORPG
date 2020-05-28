@@ -11,7 +11,7 @@ export default class Forge extends Building
 
 	constructor()
 	{
-		super(50)
+		super(110)
 
 		var sprite = new PIXI.Sprite(PIXI.Texture.from(imageUrl))
 		sprite.anchor.x = 0.5

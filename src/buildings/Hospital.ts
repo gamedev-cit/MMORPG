@@ -10,7 +10,7 @@ export default class Hospital extends Building
 
 	constructor()
 	{
-		super(50)
+		super(80)
 
 		var sprite = new PIXI.Sprite(PIXI.Texture.from(imageUrl))
 		sprite.anchor.x = 0.5

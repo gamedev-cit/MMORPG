@@ -73,7 +73,7 @@ export default class Character extends GameObject
 		} else {
 			this.healthBar.beginFill(0xc0c0c0)
 		}
-		this.healthBar.drawRect(-35, -60, healthBarWidth, 8)
+		this.healthBar.drawRect(-35, -30 - this.radius, healthBarWidth, 8)
 		this.healthBar.endFill()
 
 		this.animateCharacter()
