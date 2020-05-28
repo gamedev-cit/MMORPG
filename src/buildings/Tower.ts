@@ -24,7 +24,7 @@ export default class Tower extends Building
 	{
 		var enemies = new Array<Character>()
 		for (var character of GameStage.instance.characters) {
-			if (character.team != GameStage.instance.player.team) {
+			if (character.team != this.team) {
 				enemies.push(character)
 			}
 		}
