@@ -38,6 +38,8 @@ export default class GameStage extends Stage
 
 	playerType: string
 
+	startGameTime = (new Date()).getTime()
+
 	constructor(playerType: string)
 	{
 		super()
@@ -66,6 +68,19 @@ export default class GameStage extends Stage
 	}
 
 	loadMap()
+	{
+		var mine = new Mine()
+		mine.x = 4000
+		mine.y = 4000
+		this.world.addChild(mine)		
+	}
+
+	gameTime()
+	{
+		return (new Date()).getTime() - this.startGameTime
+	}
+
+	createCommonBuildings()
 	{
 		if (this.player.team == "A") {
 			var centerX = 2300
@@ -132,11 +147,6 @@ export default class GameStage extends Stage
 			tower.id = "tower" + this.player.team
 			this.socket.emit("character", tower.data())
 		}
-		
-		var mine = new Mine()
-		mine.x = 4000
-		mine.y = 4000
-		this.world.addChild(mine)		
 	}
 
 	respawn()
@@ -171,6 +181,10 @@ export default class GameStage extends Stage
 		this.createEnemiesIfNeeded()
 
 		this.networkUpdate()
+
+		if (this.getMainBuilding(this.player.team) == null && this.gameTime() < 5000) {
+			this.createCommonBuildings()
+		}
 	}
 
 	collideGameObjectsWithGameObjects()
@@ -269,6 +283,16 @@ export default class GameStage extends Stage
 			}
 		}
 		return buildings
+	}
+
+	getMainBuilding(team: String): Building | null
+	{
+		for (var character of this.characters) {
+			if (character.team == team && character.type == "main") {
+				return character as Building
+			}
+		}
+		return null
 	}
 
 	createEnemiesIfNeeded()
