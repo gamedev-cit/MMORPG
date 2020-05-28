@@ -35,11 +35,15 @@ export default class Bullet extends GameObject
 
 		var isEnemyOwnedByPlayer = ((gameObject.class == "building" || gameObject.class == "enemy") && (gameObject as Enemy).owner == GameStage.instance.player.id);
 		if (isEnemyOwnedByPlayer) {
-			(gameObject as Enemy).health -= this.damage
+			if (this.owner.team != gameObject.team) {
+				(gameObject as Enemy).health -= this.damage
+			}
 		}
 
 		if (gameObject == GameStage.instance.player) {
-			GameStage.instance.player.health -= this.damage
+			if (this.owner.team != gameObject.team) {
+				GameStage.instance.player.health -= this.damage
+			}
 		}
 
 		var isMeleeWeapon = (Math.hypot(this.speedX, this.speedY) < 2)
