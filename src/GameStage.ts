@@ -356,6 +356,10 @@ export default class GameStage extends Stage
 
 	checkGameEnd()
 	{
+		if (this.gameTime() < 10000) {
+			return
+		}
+		
 		var playerTeamMainBuilding = this.getMainBuilding(this.player.team)
 		var enemyMainBuilding = this.getMainBuilding(this.player.team == "A" ? "B" : "A")
 
